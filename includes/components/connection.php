@@ -2,8 +2,8 @@
 $dbhost = "localhost";
 $dbuser = "root";
 $dbpass = "";
-$dbname = "";
+$dbname = "dcs_db";
 
-if (!$con = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname)) {
+if (!$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname)) {
 	die("Connection Failed!");
 }
