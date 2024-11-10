@@ -1,0 +1,30 @@
+:root {
+    --text-color: black;
+    --bg-color: white;
+    --text-size: 30px;
+    --top: 20px;
+}
+@media only screen and (max-width: 300px) {
+    .page-title {
+        margin-top: 10px;
+        font-size: 20px;
+    }
+}
+.page-title {
+    text-align: center;
+    color: var(--text-color);
+    margin-top: 20px;
+}
+.content {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+td,
+th {
+    text-align: center;
+    padding: 20px;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
