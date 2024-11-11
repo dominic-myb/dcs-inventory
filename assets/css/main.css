@@ -5,12 +5,14 @@
     --font-size: 12px;
     --td-max-width: 165px;
 }
+
 body {
     background-color: whitesmoke;
 }
 
 .page-title {
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .page-title h1 {
@@ -18,6 +20,7 @@ body {
     text-align: center;
     font-weight: bold;
 }
+
 .table {
     justify-content: center;
 }
@@ -31,6 +34,7 @@ body {
     vertical-align: middle;
     font-size: var(--font-size);
 }
+
 .desc,
 .item-name {
     max-width: var(--td-max-width);
@@ -48,4 +52,53 @@ body {
     margin-bottom: 0;
     padding-left: 0.9rem;
     padding-right: 0.9rem;
+}
+
+#add-btn-container {
+    position: relative;
+    /* background-color: red; */
+    width: 100%;
+    height: 33px;
+    border-radius: 5px;
+}
+
+#add-btn-container button {
+    position: absolute;
+}
+
+
+@media (max-width: 575px) {
+    #add-btn-container button {
+        right: 5vw;
+    }
+}
+
+@media (min-width: 576px) {
+    #add-btn-container button {
+        right: 7vw;
+    }
+}
+
+@media (min-width: 768px) {
+    #add-btn-container button {
+        right: 8vw;
+    }
+}
+
+@media (min-width: 992px) {
+    #add-btn-container button {
+        right: 9vw;
+    }
+}
+
+@media (min-width: 1200px) {
+    #add-btn-container button {
+        right: 10vw;
+    }
+}
+
+@media (min-width: 1400px) {
+    #add-btn-container button {
+        right: 10.5vw;
+    }
 }
