@@ -25,7 +25,7 @@
         <div class="content table-responsive primary-table">
             <table class="table">
                 <thead>
-                    <tr>
+                    <tr scope="row">
                         <th scope="col">Item Name</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Location</th>
@@ -41,14 +41,15 @@
                     if ($res->num_rows > 0) {
                         while ($row = $res->fetch_assoc()) {
                     ?>
-                            <tr>
+                            <tr scope="row">
                                 <td class="item-name"><?php echo $row['item_name'] ?></td>
                                 <td><?php echo $row['quantity'] ?></td>
                                 <td><?php echo $row['location'] ?></td>
                                 <td class="desc"><?php echo $row['description'] ?></td>
                                 <td><?php echo $row['status'] ?></td>
                                 <td>
-                                    <a href="update.php?updateid=<?php echo $row['id'] ?>" class="btn btn-primary">Update</a>
+                                    <a href="update.php?updateid=<?php echo $row['id'] ?>" class="btn btn-primary">
+                                        <i class="bi bi-pencil-square"></i>Update</a>
                                     <a href="delete.php?deleteid=<?php echo $row['id'] ?>" class="btn btn-danger">Delete</a>
                                 </td>
                             </tr>
@@ -56,7 +57,7 @@
                         }
                     } else {
                         ?>
-                        <tr>
+                        <tr class="row">
                             <td colspan="6">
                                 0 Item Listed!
                             </td>
@@ -66,6 +67,13 @@
                     ?>
                 </tbody>
             </table>
+        </div>
+        <div id="add-btn-container">
+            <button type="button" class="btn btn-success">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                </svg>Add
+            </button>
         </div>
     </main>
     <script src="<?php echo BOOTSTRAP_JS_PATH ?>"></script>
