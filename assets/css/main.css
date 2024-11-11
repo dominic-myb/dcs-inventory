@@ -1,30 +1,51 @@
 :root {
-    --text-color: black;
-    --bg-color: white;
-    --text-size: 30px;
-    --top: 20px;
+    --primary-color: blue;
+    --h1-size: 21px;
+    --padding: 8px;
+    --font-size: 12px;
+    --td-max-width: 165px;
 }
-@media only screen and (max-width: 300px) {
-    .page-title {
-        margin-top: 10px;
-        font-size: 20px;
-    }
+body {
+    background-color: whitesmoke;
 }
+
 .page-title {
-    text-align: center;
-    color: var(--text-color);
     margin-top: 20px;
 }
-.content {
-    margin-top: 20px;
-    display: flex;
+
+.page-title h1 {
+    font-size: var(--h1-size);
+    text-align: center;
+    font-weight: bold;
+}
+.table {
     justify-content: center;
-    align-items: center;
 }
-td,
-th {
-    text-align: center;
-    padding: 20px;
+
+.table th,
+.table td {
+    padding: var(--padding);
     border: 1px solid black;
     border-collapse: collapse;
+    text-align: center;
+    vertical-align: middle;
+    font-size: var(--font-size);
+}
+.desc,
+.item-name {
+    max-width: var(--td-max-width);
+    text-overflow: ellipsis;
+}
+
+.btn {
+    font-size: var(--font-size);
+    margin-bottom: 2px;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.btn:last-child {
+    margin-bottom: 0;
+    padding-left: 0.9rem;
+    padding-right: 0.9rem;
 }
