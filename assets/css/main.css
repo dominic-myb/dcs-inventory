@@ -4,6 +4,7 @@
     --padding: 8px;
     --font-size: 12px;
     --td-max-width: 165px;
+    --input-height: 36px;
 }
 
 body {
@@ -19,6 +20,12 @@ body {
     font-size: var(--h1-size);
     text-align: center;
     font-weight: bold;
+}
+
+.content {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 .table {
@@ -66,16 +73,63 @@ body {
     position: absolute;
 }
 
+.modal-body label {
+    font-size: var(--font-size);
+    display: block;
+    margin-top: 20px;
+    margin-bottom: 3px;
+    margin-left: 5%;
+}
 
-@media (max-width: 575px) {
+.modal-body label:first-child {
+    margin-top: 0;
+}
+
+.modal-body {
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-body select {
+    margin-left: 5%;
+}
+
+.modal-body input,
+.modal-body textarea {
+    width: 90%;
+    margin-left: 5%;
+    height: var(--input-height);
+}
+
+@media (max-width: 450px) {
     #add-btn-container button {
-        right: 5vw;
+        right: 2vw;
+    }
+}
+
+@media (min-width: 451px) {
+    #add-btn-container button {
+        right: 4vw;
+    }
+
+    :root {
+        --h1-size: 22px;
+        --font-size: 13px;
+        --input-height: 36px;
+        --padding: 9px;
     }
 }
 
 @media (min-width: 576px) {
     #add-btn-container button {
-        right: 7vw;
+        right: 6vw;
+    }
+
+    :root {
+        --h1-size: 23px;
+        --font-size: 14px;
+        --input-height: 39px;
+        --padding: 10px;
     }
 }
 
@@ -83,22 +137,50 @@ body {
     #add-btn-container button {
         right: 8vw;
     }
+
+    :root {
+        --h1-size: 24px;
+        --font-size: 15px;
+        --input-height: 42px;
+        --padding: 11px;
+    }
 }
 
 @media (min-width: 992px) {
     #add-btn-container button {
         right: 9vw;
     }
+
+    :root {
+        --h1-size: 25px;
+        --font-size: 16px;
+        --input-height: 45px;
+        --padding: 12px;
+    }
 }
 
 @media (min-width: 1200px) {
     #add-btn-container button {
-        right: 10vw;
+        right: 9vw;
+    }
+
+    :root {
+        --h1-size: 26px;
+        --font-size: 17px;
+        --input-height: 48px;
+        --padding: 13px;
     }
 }
 
 @media (min-width: 1400px) {
     #add-btn-container button {
-        right: 10.5vw;
+        right: 9vw;
+    }
+
+    :root {
+        --h1-size: 27px;
+        --font-size: 18px;
+        --input-height: 51px;
+        --padding: 14px;
     }
 }
