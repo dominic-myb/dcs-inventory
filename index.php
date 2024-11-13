@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <?php
-  $pageTitle = "Invetory Management System";
+  $pageTitle = "Inventory Management System";
   const BOOTSTRAP_CSS_PATH = "./assets/css/vendor/bootstrap-5.2.3-dist/css/bootstrap.min.css";
   const MAIN_CSS_PATH = "./assets/css/main.css";
   const BOOTSTRAP_JS_PATH = "./assets/css/vendor/bootstrap-5.2.3-dist/js/bootstrap.min.js";
@@ -48,9 +48,9 @@
                 <td class="desc"><?php echo $row['description'] ?></td>
                 <td><?php echo $row['status'] ?></td>
                 <td>
-                  <a href="update.php?updateid=<?php echo $row['id'] ?>" class="btn btn-primary">
+                  <a href="update.php?update_id=<?php echo $row['id'] ?>" class="btn btn-primary">
                     <i class="bi bi-pencil-square"></i>Update</a>
-                  <a href="delete.php?deleteid=<?php echo $row['id'] ?>" class="btn btn-danger">Delete</a>
+                  <a href="delete.php?delete_id=<?php echo $row['id'] ?>" class="btn btn-danger">Delete</a>
                 </td>
               </tr>
             <?php
@@ -95,7 +95,7 @@
               <label>Item Name</label>
               <input type="text" name="item-name" required>
               <label>Quantity</label>
-              <input type="number" name="quanity" required>
+              <input type="number" name="quantity" required>
               <label>Location</label>
               <input type="text" name="location" required>
               <label>Description</label>
