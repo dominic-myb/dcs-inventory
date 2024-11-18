@@ -22,7 +22,7 @@
     <div class="page-title">
       <h1>DCS <?php echo $pageTitle ?></h1>
     </div>
-    <div class="content table-responsive mx-auto primary-table col-sm-11 col-md-10 col-lg-9 col-xl-8 col-xxl-7">
+    <div class="content table-responsive mx-auto primary-table col-sm-11 col-md-10 col-lg-9 col-xl-9 col-xxl-8">
       <table class="table">
         <thead>
           <tr scope="row">
@@ -42,10 +42,10 @@
             while ($row = $res->fetch_assoc()) {
           ?>
               <tr scope="row">
-                <td class="item-name"><?php echo $row['item_name'] ?></td>
+                <td><?php echo $row['item_name'] ?></td>
                 <td><?php echo $row['quantity'] ?></td>
                 <td><?php echo $row['location'] ?></td>
-                <td class="desc"><?php echo $row['description'] ?></td>
+                <td><?php echo $row['description'] ?></td>
                 <td><?php echo $row['status'] ?></td>
                 <td>
                   <a href="update.php?update_id=<?php echo $row['id'] ?>" class="btn btn-primary">
@@ -69,9 +69,9 @@
       </table>
     </div>
 
-    <div id="add-btn-container" class="container">
+    <div id="add-btn-container" class="container col-sm-11 col-md-10 col-lg-9 col-xl-9 col-xxl-8 p-0">
       <div class="row">
-        <div class="col-sm-11 col-md-10 col-lg-9 mx-auto text-center">
+        <div class="wrapper d-flex justify-content-start text-center">
           <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-item-modal">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
               <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
@@ -79,7 +79,6 @@
           </button>
         </div>
       </div>
-
     </div>
 
     <div id="add-item-modal" class="modal" tabindex="-1">
