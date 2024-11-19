@@ -1,4 +1,5 @@
 <?php include("./includes/components/connection.php") ?>
+<!-- TODO: MOVE ADD BUTTON TO THE TOP AND ADD DELETE ALL OR ADD A RADIO BUTTON TO SELECT ALL THEN DELETE ADD CONFIRMATION, ADD SENTENCE AND CONCAT ADD BTN AND DELETE BTN-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,9 +20,43 @@
 
 <body>
   <main>
-    <div class="page-title">
-      <h1>DCS <?php echo $pageTitle ?></h1>
+    <div class="page-title d-flex flex-row">
+      <div class="row justify-content-center">
+        <h1>DCS <?php echo $pageTitle ?></h1>
+
+        <div class="col-auto">
+          <label for="filter-bar" class="form-label">Filter by:</label>
+        </div>
+        <div class="col-auto">
+          <select id="filter-bar" class="form-select">
+            <option value="name">Item Name</option>
+            <option value="quantity">Quantity</option>
+            <option value="location">Location</option>
+            <option value="status">Status</option>
+          </select>
+        </div>
+        <div class="col-auto">
+          <label for="search-bar" class="form-label">
+            Search:
+          </label>
+        </div>
+        <div class="col-auto">
+          <input type="text" id="search-bar" class="form-control" placeholder="Search...">
+        </div>
+        <div class="col-auto">
+          <div class="row">
+            <div class="wrapper d-flex justify-content-start text-center">
+              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-item-modal">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                </svg>Add
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+    <div id="search-result"></div>
     <div class="content table-responsive mx-auto primary-table col-sm-11 col-md-10 col-lg-9 col-xl-9 col-xxl-8">
       <table class="table">
         <thead>
@@ -34,12 +69,12 @@
             <th scope="col">Action</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody id="table-body">
           <?php
           $query = "SELECT * FROM items";
-          $res = $conn->query($query);
+          $res = mysqli_query($conn, $query);
           if ($res->num_rows > 0) {
-            while ($row = $res->fetch_assoc()) {
+            while ($row = mysqli_fetch_assoc($res)) {
           ?>
               <tr scope="row">
                 <td><?php echo $row['item_name'] ?></td>
@@ -67,18 +102,6 @@
           ?>
         </tbody>
       </table>
-    </div>
-
-    <div id="add-btn-container" class="container col-sm-11 col-md-10 col-lg-9 col-xl-9 col-xxl-8 p-0">
-      <div class="row">
-        <div class="wrapper d-flex justify-content-start text-center">
-          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-item-modal">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-            </svg>Add
-          </button>
-        </div>
-      </div>
     </div>
 
     <div id="add-item-modal" class="modal" tabindex="-1">
