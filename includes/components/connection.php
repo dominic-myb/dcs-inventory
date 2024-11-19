@@ -5,5 +5,5 @@ $dbpass = "";
 $dbname = "dcs_db";
 
 if (!$conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname)) {
-	die("Connection Failed!");
+	die("Connection Failed: " . mysqli_connect_error());
 }
