@@ -4,12 +4,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .addEventListener("keyup", async function () {
       const query = this.value;
 
-      if (query.trim() === "") {
-        document.getElementById("table-body").innerHTML = "";
-        document.getElementById("search-result").style.display = "none";
-        return;
-      }
-
       const response = await fetch(`backend/search.php?q=${query}`);
       const data = await response.json();
 
@@ -18,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (data.length === 0) {
         document.getElementById("search-result").style.display = "none";
-        result.innerHTML = `<tr class="row">
+        result.innerHTML = `<tr scope="row">
                                 <td colspan="6">0 Item Listed!</td>
                             </tr>`;
       } else {
