@@ -1,7 +1,7 @@
 <div class="page-title d-flex flex-row">
     <div class="row justify-content-center">
 
-        <h1>DCS <?= $pageTitle ?></h1>
+        <h1>DCS <?= $PAGE_TITLE ?></h1>
 
         <div class="col-auto">
             <label for="filter-bar" class="form-label">Filter by:</label>
