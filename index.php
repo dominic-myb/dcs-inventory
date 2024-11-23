@@ -6,6 +6,7 @@ $MAIN_CSS_PATH = "./assets/css/main.css";
 $JQUERY_PATH = "./assets/vendors/jquery-3.7.1.min.js";
 $BOOTSTRAP_JS_PATH = "./assets/vendors/js/bootstrap.min.js";
 $MAIN_JS_PATH = "./assets/js/main.js";
+$ICON_IMG_PATH = "./assets/imgs/dcs-logo-round.png";
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +17,8 @@ $MAIN_JS_PATH = "./assets/js/main.js";
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="<?= $BOOTSTRAP_CSS_PATH ?>">
   <link rel="stylesheet" href="<?= $MAIN_CSS_PATH ?>">
-  <title><?= $PAGE_TITLE ?></title>
+  <link rel="icon" type="image/x-icon" href="<?= $ICON_IMG_PATH ?>">
+  <title>DCS - <?= $PAGE_TITLE ?></title>
 </head>
 
 <body>
@@ -58,7 +60,7 @@ $MAIN_JS_PATH = "./assets/js/main.js";
     <!-- ########## START OF ITEM TABLE IN INDEX.HTML ########### -->
 
     <div class="content table-responsive mx-auto primary-table col-sm-11 col-md-10 col-lg-9 col-xl-9 col-xxl-8">
-      <table class="table" id="items-table">
+      <table class="table table-hover" id="items-table">
         <thead>
           <tr scope="row">
             <th scope="col">Item Name</th>
