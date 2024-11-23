@@ -1,0 +1,92 @@
+@font-face {
+  font-family: JetBrains Mono NL;
+  src: url(../fonts/JetBrainsMonoNL-Regular.ttf);
+  font-weight: 400;
+}
+
+:root {
+  --main-font: JetBrains Mono NL;
+  --main-color: #000;
+  --sec-color: #fff;
+  --bg-color: #2a2d34;
+  --fg-color: #5c946e;
+  --front: #30c5ff;
+  --font-size: 16px;
+}
+
+html,
+body {
+  min-width: 575px;
+}
+
+body {
+  background-color: var(--sec-color);
+  color: var(--main-color);
+  font-family: var(--main-font), "Courier New", Courier, monospace;
+  font-size: var(--font-size);
+}
+
+.content {
+  background-color: var(--bg-color);
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  background-color: var(--front);
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+}
+
+.wrapper h1 {
+  text-align: center;
+  margin: 0;
+  padding: 0.4rem;
+  font-size: 2rem;
+  color: var(--main-color);
+}
+
+.form {
+  background-color: var(--fg-color);
+  width: 300px;
+  padding: 2rem;
+  border-radius: 0 0 1rem 1rem;
+}
+
+.form input[type="text"] {
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.form input[type="password"] {
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.btn-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-container input[type="submit"] {
+  width: 50%;
+  border-radius: 0.2rem;
+}
+
+#incorrect-pass {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--front);
+  color: red;
+  padding: 10px;
+  margin-bottom: 1rem;
+}
+
+#incorrect-pass p {
+  margin: 0;
+}
