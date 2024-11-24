@@ -22,16 +22,16 @@ $LOGIN_JS = "../assets/js/login.js";
 
 <body>
   <main>
-    <div class="content d-flex col-sm-11 col-md-10 col-lg-9 col-xl-9 col-xxl-8">
+    <div class="content d-flex">
       <div class="wrapper">
         <h1>LOGIN</h1>
-        <form method="post" class="form">
+        <form method="post" id="login-form" class="login-form">
           <label for="username">Username:</label>
           <input type="text" id="username" name="username" required>
           <label for="password">Password:</label>
           <input type="password" id="password" name="password" required>
           <div id="incorrect-pass">
-            <p>incorrect Password!</p>
+            <p>Incorrect Username or Password!</p>
           </div>
           <div class="btn-container">
             <input type="submit" class="submit-btn">
@@ -40,6 +40,7 @@ $LOGIN_JS = "../assets/js/login.js";
       </div>
     </div>
   </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.1/purify.min.js"></script>
   <script src="<?= $BOOTSTRAP_JS_PATH ?>"></script>
   <script src="<?= $JQUERY_PATH ?>"></script>
   <script src="<?= $LOGIN_JS ?>"></script>
