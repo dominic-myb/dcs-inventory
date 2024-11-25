@@ -22,29 +22,51 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("username").value.trim()
       );
       const password = DOMPurify.sanitize(
-        document.getElementById("username").value.trim()
+        document.getElementById("pass-input").value.trim()
       );
+      const errorMsg = document.getElementById("error-message");
 
-      fetch("../backend/login.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, password }),
-      })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.error("Error:", error));
+      try {
+        const response = await fetch("../backend/login.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, password }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.status === "success") {
+          console.log("Login successful:", data.message);
+          window.location.href = "../index.php";
+        } else {
+          console.error("Login failed:", data.message);
+          errorMsg.getElementsByTagName("p").value = data.message;
+          errorMsg.style.display = "flex";
+
+          // hides error message after 3 secs
+          setTimeout(() => {
+            errorMsg.style.display = "none";
+          }, 3000);
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
+      }
     });
 });
 
 /***** DETECT IF INCORRECT PASS IS SHOWN *****/
 
-const incorrectPassMsg = document.getElementById("pass-incorrect");
-const submitBtn = document.getElementById("submit-btn");
-// incorrectPassMsg.hasAttribute;
-if (incorrectPassMsg.hasAttribute("display") === "flex") {
-  submitBtn.style.marginTop = 0;
-} else {
-  submitBtn.style.marginTop = "1rem";
-}
+// const errorMsg = document.getElementById("error-message p");
+// const submitBtn = document.getElementById("submit-btn");
+// // errorMsg.hasAttribute;
+// if (errorMsg.hasAttribute("display") === "flex") {
+//   submitBtn.style.marginTop = 0;
+// } else {
+//   submitBtn.style.marginTop = "1rem";
+// }
