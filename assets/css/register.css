@@ -1,0 +1,92 @@
+@font-face {
+  font-family: JetBrains Mono NL;
+  src: url(../fonts/JetBrainsMonoNL-Regular.ttf);
+  font-weight: 400;
+}
+:root {
+  --main-font: JetBrains Mono NL;
+
+  /* COLORS */
+  --light: #fff;
+  --dark: #000;
+  --bg-col: #2a2d34;
+  --wrap-col: #5c946e;
+  --heading-col: #30c5ff;
+
+  /* SIZES */
+  --m-font-size: 16px;
+  --h1-font-size: 32px;
+  --w-register-form: 300px;
+}
+
+html,
+body {
+  min-width: 575px;
+}
+
+body {
+  background-color: var(--bg-col);
+  color: var(--dark);
+  font-family: var(--main-font), "Courier New", Courier, monospace;
+  font-size: var(--font-size);
+}
+
+.content {
+  background-color: var(--bg-col);
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  background-color: var(--heading-col);
+  align-items: center;
+  justify-content: center;
+  border-radius: 1rem;
+  border: 1px solid black;
+}
+
+.heading-container {
+  text-align: center;
+  margin: 1rem 0 1rem 0;
+  padding: 0.4rem;
+  font-size: var(--h1-font-size);
+  color: var(--dark);
+  /* background-color: var(--heading-col); */
+  border-radius: 1rem 1rem 0 0;
+}
+
+.heading-container h1 {
+  margin: 0;
+}
+
+.form-container {
+  background-color: var(--wrap-col);
+  width: var(--w-register-form);
+  padding: 2rem;
+  border-radius: 0 0 1rem 1rem;
+  border-top: 1px solid black;
+}
+
+#registration-form input {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--light);
+}
+
+.error-message p {
+  margin: 0;
+}
+
+.submit-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
