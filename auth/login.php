@@ -33,7 +33,7 @@ $LOGIN_JS = "../assets/js/login.js";
             <input type="password" id="pass-input" autocomplete="off" required>
             <input type="button" id="pass-toggle" value="Show">
           </div>
-          <div id="pass-incorrect">
+          <div id="error-message">
             <p>Incorrect Username or Password!</p>
           </div>
           <div class="btn-container">
