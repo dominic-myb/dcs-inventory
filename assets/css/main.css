@@ -4,11 +4,6 @@
   font-weight: 400;
 }
 
-:root {
-  --h1-font-size: 30px;
-  --font-size: 16px;
-}
-
 html,
 body {
   min-width: 575px;
@@ -46,4 +41,58 @@ td {
   text-align: center;
   vertical-align: middle;
   font-size: var(--font-size);
+}
+
+/***** EXTRA-SMALL SCREEN SIZE *****/
+@media (max-width: 575px) {
+  :root {
+    /***** SIZES *****/
+    --h1-font-size: 30px;
+    --font-size: 14px;
+  }
+}
+
+/***** SMALL SCREEN SIZE *****/
+@media (min-width: 576px) {
+  :root {
+    /***** SIZES *****/
+    --h1-font-size: 30px;
+    --font-size: 14px;
+  }
+}
+
+/***** MEDIUM SCREEN SIZE *****/
+@media (min-width: 768px) {
+  :root {
+    /***** SIZES *****/
+    --h1-font-size: 32px;
+    --font-size: 16px;
+  }
+}
+
+/***** LARGE SCREEN SIZE *****/
+@media (min-width: 992px) {
+  :root {
+    /***** SIZES *****/
+    --h1-font-size: 34px;
+    --font-size: 18px;
+  }
+}
+
+/***** EXTRA-LARGE SCREEN SIZE *****/
+@media (min-width: 1200px) {
+  :root {
+    /***** SIZES *****/
+    --h1-font-size: 34px;
+    --font-size: 18px;
+  }
+}
+
+/***** EXTRA-EXTRA-LARGE SCREEN SIZE *****/
+@media (min-width: 1400px) {
+  :root {
+    /***** SIZES *****/
+    --h1-font-size: 34px;
+    --font-size: 18px;
+  }
 }
