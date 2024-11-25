@@ -87,8 +87,8 @@ body {
   margin-top: 1rem;
 }
 
-#pass-incorrect {
-  display: flex;
+#error-message {
+  display: none;
   align-items: center;
   justify-content: center;
   background-color: var(--fg-color);
@@ -100,7 +100,7 @@ body {
   border-radius: 0.2rem;
 }
 
-#pass-incorrect p {
+#error-message p {
   margin: 0;
 }
 
