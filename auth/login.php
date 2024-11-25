@@ -27,14 +27,17 @@ $LOGIN_JS = "../assets/js/login.js";
         <h1>LOGIN</h1>
         <form method="post" id="login-form" class="login-form">
           <label for="username">Username:</label>
-          <input type="text" id="username" name="username" required>
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required>
-          <div id="incorrect-pass">
+          <input type="text" id="username" autocomplete="off" required>
+          <label for="pass-input">Password:</label>
+          <div class="pass-container">
+            <input type="password" id="pass-input" autocomplete="off" required>
+            <input type="button" id="pass-toggle" value="Show">
+          </div>
+          <div id="pass-incorrect">
             <p>Incorrect Username or Password!</p>
           </div>
           <div class="btn-container">
-            <input type="submit" class="submit-btn">
+            <input type="submit" id="submit-btn" class="submit-btn">
           </div>
         </form>
       </div>
