@@ -54,6 +54,7 @@ $REGISTER_JS_PATH = "../assets/js/register.js";
       </div>
     </div>
   </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.1/purify.min.js"></script>
   <script src="<?= $BOOTSTRAP_JS_PATH ?>"></script>
   <script src="<?= $JQUERY_PATH ?>"></script>
   <script src="<?= $REGISTER_JS_PATH ?>"></script>
