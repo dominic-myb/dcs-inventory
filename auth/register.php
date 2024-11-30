@@ -33,15 +33,15 @@ $REGISTER_JS_PATH = "../assets/js/register.js";
         <div class="form-container">
           <form id="registration-form">
             <label for="firstname-input">Firstname:</label>
-            <input type="text" id="firstname-input">
+            <input type="text" id="firstname-input" name="firstname" autocomplete="off" required>
             <label for="lastname-input">Lastname:</label>
-            <input type="text" id="lastname-input">
+            <input type="text" id="lastname-input" name="lastname" autocomplete="off" required>
             <label for="username-input">Username:</label>
-            <input type="text" id="username-input">
+            <input type="text" id="username-input" name="username" autocomplete="off" required>
             <label for="password-input">Password:</label>
-            <input type="password" id="password-input">
+            <input type="password" id="password-input" name="password" autocomplete="off" required>
             <label for="confirm-password-input">Confirm Password:</label>
-            <input type="password" id="confirm-password-input">
+            <input type="password" id="confirm-password-input" name="confirmPassword" autocomplete="off" required>
             <div id="error-message" class="error-message">
               <p>Username Unavailable</p>
             </div>
