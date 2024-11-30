@@ -9,36 +9,10 @@ $lastname = $data->lastname ?? '';
 $username = $data->username ?? '';
 $password = $data->password ?? '';
 $password = hash('sha256', $password);
+$is_admin = 0;
 
-// Query the database
-$sql = "SELECT * FROM accounts WHERE username = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("s", $username);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows > 0) {
-  echo json_encode([
-    "status" => "error",
-    "message" => "Username unavailable!"
-  ]);
-} else {
-  $sql = "INSERT INTO accounts (username, hashed_password, first_name, last_name, is_admin) VALUES (?,?,?,?,?)";
-  $stmt = $conn->prepare($sql);
-  $stmt->bind_param("ssssi", $username, $password, $firstname, $lastname, 0);
-
-  if($stmt->execute()) {
-    echo json_encode([
-      "status" => "error",
-      "message" => "Account Not Registered!"
-    ]);
-    exit();
-  }
-  echo json_encode([
-    "status" => "success",
-    "message" => "Account Registered!"
-  ]);
-}
+include("functions.php");
+addNewAccount($conn, $username, $password, $firstname, $lastname, $is_admin);
 
 $stmt->close();
 $conn->close();
