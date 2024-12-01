@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
+  function showErrorMsg(errorMsgId, msg, seconds){
+    errorMsgId.querySelector("p").textContent = msg;
+    errorMsgId.style.display = "flex";
+    setTimeout(()=>{
+      errorMsgId.style.display = "none";
+    }, seconds);
+  }
   document
     .getElementById("registration-form")
     .addEventListener("submit", async (e) => {
@@ -16,8 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Check if passwords match
       if (password !== confirmPassword) {
-        errorMsg.querySelector("p").textContent = "Password doesn't match";
-        errorMsg.style.display = "flex";
+        showErrorMsg(errorMsg, "Password doesn't match" ,3000);
         return;
       }
 
@@ -48,16 +54,12 @@ document.addEventListener("DOMContentLoaded", () => {
           window.location.href = "login.php";
         } else {
           console.error("Registration failed:", data.message);
-          errorMsg.querySelector("p").textContent = data.message;
-          errorMsg.style.display = "flex";
-
           // Hides error message after 3 seconds
-          setTimeout(() => {
-            errorMsg.style.display = "none";
-          }, 3000);
+          showErrorMsg(errorMsg, data.message, 3000);
         }
       } catch (error) {
         console.error("An error occurred:", error);
+        showErrorMsg(errorMsg, error.msg, 3000);
       }
     });
 });
