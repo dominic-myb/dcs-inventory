@@ -34,7 +34,10 @@ $LOGIN_JS = "../assets/js/login.js";
             <input type="button" id="pass-toggle" value="Show">
           </div>
           <div id="error-message">
-            <p>Incorrect Username or Password!</p>
+            <p></p>
+          </div>
+          <div class="sign-up-container">
+            <a href="./register.php">Signup</a>
           </div>
           <div class="btn-container">
             <input type="submit" id="submit-btn" class="submit-btn">
