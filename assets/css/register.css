@@ -74,7 +74,7 @@ body {
 }
 
 .error-message {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   background-color: var(--light);
