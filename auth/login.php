@@ -12,11 +12,11 @@ $LOGIN_JS = "../assets/js/login.js";
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="shortcut icon" href="<?= $ICON_IMG_PATH ?>" type="image/x-icon">
-  <link rel="stylesheet" href="<?= $BOOTSTRAP_CSS_PATH ?>">
-  <link rel="stylesheet" href="<?= $LOGIN_CSS ?>">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="<?= $ICON_IMG_PATH ?>" type="image/x-icon" />
+  <link rel="stylesheet" href="<?= $BOOTSTRAP_CSS_PATH ?>" />
+  <link rel="stylesheet" href="<?= $LOGIN_CSS ?>" />
   <title>DCS - <?= $PAGE_TITLE ?></title>
 </head>
 
@@ -24,25 +24,40 @@ $LOGIN_JS = "../assets/js/login.js";
   <main>
     <div class="content d-flex">
       <div class="wrapper">
+
         <h1>LOGIN</h1>
-        <form method="post" id="login-form" class="login-form">
-          <label for="username">Username:</label>
-          <input type="text" id="username" autocomplete="off" required>
-          <label for="pass-input">Password:</label>
+
+        <form id="login-form" class="login-form">
+
+          <div class="user-container">
+            <label for="username">Username:</label>
+            <input type="text" id="username" autocomplete="off" required />
+
+            <div id="username-err" class="err-msg">
+              <!-- username errors here! -->
+            </div>
+          </div>
+
           <div class="pass-container">
-            <input type="password" id="pass-input" autocomplete="off" required>
-            <input type="button" id="pass-toggle" value="Show">
+            <label for="pass-input">Password:</label>
+            <input type="password" id="pass-input" autocomplete="off" required />
+            <input type="button" id="pass-toggle" value="Show" />
+
+            <div id="password-err" class="err-msg">
+              <!-- password errors here! -->
+            </div>
           </div>
-          <div id="error-message">
-            <p></p>
-          </div>
+
           <div class="sign-up-container">
             <a href="./register.php">Signup</a>
           </div>
+
           <div class="btn-container">
-            <input type="submit" id="submit-btn" class="submit-btn">
+            <input type="submit" id="submit-btn" class="submit-btn" />
           </div>
+
         </form>
+
       </div>
     </div>
   </main>
