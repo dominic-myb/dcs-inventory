@@ -32,27 +32,31 @@ $REGISTER_JS_PATH = "../assets/js/register.js";
 
         <div class="form-container">
           <form id="registration-form">
-            <label for="firstname-input">Firstname:</label>
-            <input type="text" id="firstname-input" name="firstname" autocomplete="off" required>
-            <label for="lastname-input">Lastname:</label>
-            <input type="text" id="lastname-input" name="lastname" autocomplete="off" required>
+            
+            <label for="fnameInput">Firstname:</label>
+            <input type="text" id="fnameInput" name="fname" autocomplete="off" required>
 
-            <label for="username-input">Username:</label>
-            <input type="text" id="username-input" name="username" autocomplete="off" required>
-            <div class="user-error">
+            <label for="lnameInput">Lastname:</label>
+            <input type="text" id="lnameInput" name="lname" autocomplete="off" required>
+
+            <label for="userInput">Username:</label>
+            <input type="text" id="userInput" name="user" autocomplete="off" required>
+            <div id="userErrorMsg">
+              <!-- // FIXME: -->
               <!-- Display here the error for usernames: -->
               <!-- "Oops! That username is already in use." -->
               <!-- "Usernames can only contain letters, numbers, and underscores." -->
               <!-- "Username cannot be empty." -->
             </div>
 
-            <label for="password-input">Password:</label> 
-            <input type="password" id="password-input" name="password" autocomplete="off" required>
+            <label for="passInput">Password:</label> 
+            <input type="password" id="passInput" name="pass" autocomplete="off" required>
 
-            <label for="confirm-password-input">Confirm Password:</label>
-            <input type="password" id="confirm-password-input" name="confirmPassword" autocomplete="off" required>
+            <label for="passInputConfirm">Confirm Password:</label>
+            <input type="password" id="passInputConfirm" name="passConfirm" autocomplete="off" required>
 
-            <div class="pass-error">
+            <div id="passErrorMsg">
+              <!-- // FIXME: -->
               <!-- Display password Error: -->
               <!-- "Password must include at least one uppercase letter, one number, and one special character." -->
               <!-- "Password must be at least 8 characters long." -->
@@ -62,7 +66,7 @@ $REGISTER_JS_PATH = "../assets/js/register.js";
               <!-- "Use only letters, numbers, and symbols in your password." -->
             </div>
 
-            <div id="error-message" class="error-message">
+            <div id="errorMsg" class="error-message">
               <p>Username Unavailable</p>
             </div>
 
