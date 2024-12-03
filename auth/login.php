@@ -31,20 +31,19 @@ $LOGIN_JS = "../assets/js/login.js";
 
           <div class="user-container">
             <label for="username">Username:</label>
-            <input type="text" id="username" autocomplete="off" required />
-
-            <div id="username-err" class="err-msg">
-              <!-- username errors here! -->
-            </div>
+            <input type="text" id="userInput" autocomplete="off" required />
           </div>
 
           <div class="pass-container">
             <label for="pass-input">Password:</label>
-            <input type="password" id="pass-input" autocomplete="off" required />
-            <input type="button" id="pass-toggle" value="Show" />
+            <input type="password" id="passInput" autocomplete="off" required />
+            <input type="button" id="passToggle" value="Show" />
 
-            <div id="password-err" class="err-msg">
+            <div id="errMsg" class="err-msg">
               <!-- password errors here! -->
+              <!-- "The username or password you entered is incorrect." -->
+              <!-- "Something went wrong. Unable to log in. Please refresh and try again." -->
+              <!-- "We couldn't find an account with those credentials. Please sign up if you're new." add link of register -->
             </div>
           </div>
 
@@ -53,7 +52,7 @@ $LOGIN_JS = "../assets/js/login.js";
           </div>
 
           <div class="btn-container">
-            <input type="submit" id="submit-btn" class="submit-btn" />
+            <input type="submit" id="submitBtn" class="submit-btn" />
           </div>
 
         </form>
