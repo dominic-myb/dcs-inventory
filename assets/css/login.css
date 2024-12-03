@@ -87,7 +87,8 @@ body {
   margin-top: 1rem;
 }
 
-#error-message {
+/* FIXME: fix the alignment of passToggle */
+#errorMsg {
   display: none;
   align-items: center;
   justify-content: center;
@@ -100,7 +101,7 @@ body {
   border-radius: 0.2rem;
 }
 
-#error-message p {
+#errorMsg p {
   margin: 0;
 }
 
@@ -109,7 +110,7 @@ body {
   width: 100%;
 }
 
-#pass-input {
+#passInput {
   width: 100%;
   padding-right: 50px;
   font-size: var(--font-size);
@@ -117,7 +118,7 @@ body {
   border-radius: 0.2rem;
 }
 
-#pass-toggle {
+#passToggle {
   position: absolute;
   right: 10px;
   top: 50%;
