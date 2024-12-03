@@ -39,7 +39,7 @@ $LOGIN_JS = "../assets/js/login.js";
             <input type="password" id="passInput" autocomplete="off" required />
             <input type="button" id="passToggle" value="Show" />
 
-            <div id="errMsg" class="err-msg">
+            <div id="errorMsg" class="error-msg">
               <!-- password errors here! -->
               <!-- "The username or password you entered is incorrect." -->
               <!-- "Something went wrong. Unable to log in. Please refresh and try again." -->
