@@ -36,18 +36,40 @@ $REGISTER_JS_PATH = "../assets/js/register.js";
             <input type="text" id="firstname-input" name="firstname" autocomplete="off" required>
             <label for="lastname-input">Lastname:</label>
             <input type="text" id="lastname-input" name="lastname" autocomplete="off" required>
+
             <label for="username-input">Username:</label>
             <input type="text" id="username-input" name="username" autocomplete="off" required>
-            <label for="password-input">Password:</label>
+            <div class="user-error">
+              <!-- Display here the error for usernames: -->
+              <!-- "Oops! That username is already in use." -->
+              <!-- "Usernames can only contain letters, numbers, and underscores." -->
+              <!-- "Username cannot be empty." -->
+            </div>
+
+            <label for="password-input">Password:</label> 
             <input type="password" id="password-input" name="password" autocomplete="off" required>
+
             <label for="confirm-password-input">Confirm Password:</label>
             <input type="password" id="confirm-password-input" name="confirmPassword" autocomplete="off" required>
+
+            <div class="pass-error">
+              <!-- Display password Error: -->
+              <!-- "Password must include at least one uppercase letter, one number, and one special character." -->
+              <!-- "Password must be at least 8 characters long." -->
+              <!-- "Passwords do not match. Please try again." -->
+              <!-- "Avoid using commonly used passwords for better security." -->
+              <!-- "Password cannot be empty." -->
+              <!-- "Use only letters, numbers, and symbols in your password." -->
+            </div>
+
             <div id="error-message" class="error-message">
               <p>Username Unavailable</p>
             </div>
+
             <div class="submit-btn-container">
               <input type="submit" value="Submit">
             </div>
+            
           </form>
         </div>
 
