@@ -51,6 +51,23 @@ document.addEventListener("DOMContentLoaded", () => {
     return null;
   }
 
+  function passwordStrengthChecker(password){
+    const standardLength = password.length >= 8;
+    const hasLowercase = /[a-z]/.test(password);
+    const hasUppercase = /[A-Z]/.test(password);
+    const hasNumber = /\d/.test(password);
+    const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+    const isNotPawned = !isPasswordPwned(password);
+
+    if(!standardLength) return "Weak";
+    const strengthScore = [hasLowercase, hasUppercase, hasNumber, hasSymbol, isNotPawned].filter(Boolean).length;
+
+    if (strengthScore === 5 && password.length >= 12) return "Strong";
+    if (strengthScore >= 2 ) return "Moderate";
+
+    return "Weak";
+  }
+
   async function isPasswordPwned(password) {
     const sha1 = new Hashes.SHA1().hex(password);
     const prefix = sha1.substring(0,5);
