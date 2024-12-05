@@ -18,6 +18,7 @@
   */
 
 document.addEventListener("DOMContentLoaded", () => {
+  
   function showErrorMsg(errorMsgId, msg, seconds) {
     errorMsgId.querySelector("p").textContent = msg;
     errorMsgId.style.display = "flex";
@@ -48,6 +49,17 @@ document.addEventListener("DOMContentLoaded", () => {
       return [errorId, errorMsg];  
     }
     return null;
+  }
+
+  async function isPasswordPwned(password) {
+    const sha1 = new Hashes.SHA1().hex(password);
+    const prefix = sha1.substring(0,5);
+    const suffix = sha1.substring(5);
+
+    const response = await fetch(`https://api.pwnedpasswords.com/range/${prefix}`);
+    const data = await response.text();
+
+    return data.includes(suffix);
   }
 
   function inputValidation(
