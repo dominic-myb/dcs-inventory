@@ -41,7 +41,7 @@ $REGISTER_JS_PATH = "../assets/js/register.js";
 
             <label for="userInput">Username:</label>
             <input type="text" id="userInput" name="user" autocomplete="off" required>
-            <div id="userErrorMsg">
+            <div id="userErrorMsg" class="error-message">
               <!-- // FIXME: -->
               <!-- Display here the error for usernames: -->
               <!-- "Oops! That username is already in use." -->
@@ -55,7 +55,7 @@ $REGISTER_JS_PATH = "../assets/js/register.js";
             <label for="passInputConfirm">Confirm Password:</label>
             <input type="password" id="passInputConfirm" name="passConfirm" autocomplete="off" required>
 
-            <div id="passErrorMsg">
+            <div id="passErrorMsg" class="error-message">
               <!-- // FIXME: -->
               <!-- Display password Error: -->
               <!-- "Password must include at least one uppercase letter, one number, and one special character." -->
@@ -66,12 +66,8 @@ $REGISTER_JS_PATH = "../assets/js/register.js";
               <!-- "Use only letters, numbers, and symbols in your password." -->
             </div>
 
-            <div id="errorMsg" class="error-message">
-              <p>Username Unavailable</p>
-            </div>
-
             <div class="submit-btn-container">
-              <input type="submit" value="Submit">
+              <input type="submit" value="Submit" id="submitBtn">
             </div>
             
           </form>

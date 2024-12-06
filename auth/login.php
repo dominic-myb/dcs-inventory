@@ -30,12 +30,12 @@ $LOGIN_JS = "../assets/js/login.js";
         <form id="login-form" class="login-form">
 
           <div class="user-container">
-            <label for="username">Username:</label>
+            <label for="userInput">Username:</label>
             <input type="text" id="userInput" autocomplete="off" required />
           </div>
 
           <div class="pass-container">
-            <label for="pass-input">Password:</label>
+            <label for="passInput">Password:</label>
             <input type="password" id="passInput" autocomplete="off" required />
             <input type="button" id="passToggle" value="Show" />
 
@@ -52,7 +52,7 @@ $LOGIN_JS = "../assets/js/login.js";
           </div>
 
           <div class="btn-container">
-            <input type="submit" id="submitBtn" class="submit-btn" />
+            <input type="submit" id="submitBtn" class="submit-btn" value="Submit"/>
           </div>
 
         </form>
