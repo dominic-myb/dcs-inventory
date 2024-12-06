@@ -1,7 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
+  /***** SHOW AND HIDE ERROR *****/
+  function showErrorMsg(id, msg, time) {
+    const pTag = document.createElement("p");
+    pTag.textContent = msg;
+    id.appendChild(pTag);
+    id.style.display = "flex";
+    setTimeout(() => {
+      id.style.display = "none";
+      pTag.textContent = "";
+    }, time);
+  }
+
   /***** SHOW AND HIDE OF PASSWORD *****/
-  const passToggle = document.getElementById("pass-toggle");
-  const passInput = document.getElementById("pass-input");
+  const passToggle = document.getElementById("passToggle");
+  const passInput = document.getElementById("passInput");
   passToggle.addEventListener("click", () => {
     passInput.style.margin = 0;
     if (passInput.type === "password") {
@@ -18,13 +30,20 @@ document.addEventListener("DOMContentLoaded", () => {
     .getElementById("login-form")
     .addEventListener("submit", async (e) => {
       e.preventDefault();
+      const submitBtn = document.getElementById("submitBtn");
+
+      submitBtn.disabled = true;
+      setTimeout(() => {
+        submitBtn.disabled = false;
+      }, 3000);
+
       const username = DOMPurify.sanitize(
-        document.getElementById("username").value.trim()
+        document.getElementById("userInput").value.trim()
       );
       const password = DOMPurify.sanitize(
-        document.getElementById("pass-input").value.trim()
+        document.getElementById("passInput").value.trim()
       );
-      const errorMsg = document.getElementById("error-message");
+      const errorMsg = document.getElementById("errorMsg");
 
       try {
         const response = await fetch("../backend/login.php", {
@@ -45,14 +64,8 @@ document.addEventListener("DOMContentLoaded", () => {
           console.log("Login successful:", data.message);
           window.location.href = "../index.php";
         } else {
-          console.error("Login failed:", data.message);
-          errorMsg.getElementsByTagName("p").value = data.message;
-          errorMsg.style.display = "flex";
-
-          // hides error message after 3 secs
-          setTimeout(() => {
-            errorMsg.style.display = "none";
-          }, 3000);
+          // console.error("Login failed:", data.message);
+          showErrorMsg(errorMsg, data.message, 3000);
         }
       } catch (error) {
         console.error("An error occurred:", error);
