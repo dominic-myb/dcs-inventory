@@ -1,115 +1,87 @@
-  /* 
+/* 
   TODO: FEAT: WEAK - MODERATE - STRONG PASSWORD INDICATOR | RED | ORANGE | GREEN
   TODO: ADD API FOR COMMON PASSWORDS
   * CRITERIA: 
-  ? WEAK
+  ? WEAK === 0-2 POINTS + < 8 CHARS
   * * NO COMBINATION || < 8 CHARS 
-  ? MODERATE
+  ? MODERATE === >= 3 POINTS + !> 12 CHARS
   * * IN THE API COMMON PASSWORDS || 8-12 CHARS
-  ? STRONG 
+  ? STRONG === >12 CHARS + 5 POINTS
   * * > 12 CHARS || ALL COMBINATIONS CHECK || NOT IN API COMMON PASSWORD DICTIONARY
 
   TODO:
-  1. Create a function for input validity
-  2. The flow must be firstname > lastname > username > password > confirm_password
-  3. if there's a problem with first name return the error message
-  4. get the message if there is: get the errorMsg on respective error message div
+  1. FIND HEX COLOR FOR RED, ORANGE, GREEM
   ?ADD A NEW PHP TO CHECK IF USERNAME IS AVAILABLE? 
+  RED: #FF6961
+  ORANGE: #FFB54C
+  GREEN: #7ABD7E
   */
 
 document.addEventListener("DOMContentLoaded", () => {
-  
   function showErrorMsg(errorMsgId, msg, seconds) {
-    errorMsgId.querySelector("p").textContent = msg;
+    const pTag = document.createElement("p");
+    pTag.textContent = msg;
+    errorMsgId.appendChild(pTag);
     errorMsgId.style.display = "flex";
     setTimeout(() => {
       errorMsgId.style.display = "none";
+      pTag.textContent = "";
     }, seconds);
   }
 
-  // FIXME: MAKE THIS AND INPUT VALIDATION INTO ONE
-  function usernameValidation(username){
-    const errorId = "userErrorMsg";
-    var errorMsg = null;
-
-    if (username.length < 8) {
-      errorMsg = "Username must be at least 8 characters long.";
-      return [errorId, errorMsg];  
-    }
-    if (!/[A-Z]/.test(username)){
-      errorMsg = "Username must include at least one uppercase letter.";
-      return [errorId, errorMsg];  
-    }
-    if (!/[a-z]/.test(username)){
-      errorMsg = "Username must include at least one lowercase letter.";
-      return [errorId, errorMsg];  
-    }
-    if(!/[^a-zA-Z0-9]/.test(username)){
-      errorMsg = "Username must include at least one symbol.";
-      return [errorId, errorMsg];  
-    }
-    return null;
-  }
-
-  function passwordStrengthChecker(password){
+  // ?MAKE THIS RETURNS INTEGER?
+  function passwordStrengthChecker(password) {
     const standardLength = password.length >= 8;
     const hasLowercase = /[a-z]/.test(password);
     const hasUppercase = /[A-Z]/.test(password);
     const hasNumber = /\d/.test(password);
     const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
-    const isNotPawned = !isPasswordPwned(password);
 
-    if(!standardLength) return "Weak";
-    const strengthScore = [hasLowercase, hasUppercase, hasNumber, hasSymbol, isNotPawned].filter(Boolean).length;
-
-    if (strengthScore === 5 && password.length >= 12) return "Strong";
-    if (strengthScore >= 2 ) return "Moderate";
+    if (!standardLength) return "Weak";
+    const strengthScore = [
+      hasLowercase,
+      hasUppercase,
+      hasNumber,
+      hasSymbol,
+    ].filter(Boolean).length;
+    if (strengthScore === 4 && password.length >= 12) return "Strong";
+    if (strengthScore >= 2) return "Moderate";
 
     return "Weak";
   }
 
+  //? REMOVE THIS? OR CONTINUE? IF CONTINUE GET A TXT FILE OF PWNED PASSWORDS THEN CONVERT INTO HASH THEN CONVERT TO JSON
   async function isPasswordPwned(password) {
     const sha1 = new Hashes.SHA1().hex(password);
-    const prefix = sha1.substring(0,5);
+    const prefix = sha1.substring(0, 5);
     const suffix = sha1.substring(5);
 
-    const response = await fetch(`https://api.pwnedpasswords.com/range/${prefix}`);
+    const response = await fetch(
+      `https://api.pwnedpasswords.com/range/${prefix}`
+    );
     const data = await response.text();
 
     return data.includes(suffix);
   }
 
-  function inputValidation(
-    firstname,
-    lastname,
-    username,
-    password,
-    passwordConfirm
-  ) {
-    var errorId = "";
-    var errorMsg = "";
-
-    if (firstname === "") {
-      errorId = "fnameErrorMsg";
-      errorMsg = "Firstname cannot be empty.";
-      return [errorId, errorMsg];
-    }
-    if (lastname === "") {
-      errorId = "lnameErrorMsg";
-      errorMsg = "Lastname cannot be empty.";
-      return [errorId, errorMsg];
-    }
-    if(usernameValidation(username) !== null){
-      [errorId, errorMsg] = usernameValidation(username);
-    }
-
-    return [null, null];
-  }
+  document.getElementById("passInput").addEventListener("keyup", async (e) => {
+    e.preventDefault();
+    const password = document.getElementById("passInput").value.trim();
+    const passwordStrength = passwordStrengthChecker(password);
+    // console.log(`Password Strength: ${passwordStrength}`);
+  });
 
   document
     .getElementById("registration-form")
     .addEventListener("submit", async (e) => {
       e.preventDefault();
+
+      const submitBtn = document.getElementById("submitBtn");
+      submitBtn.disabled = true;
+
+      setTimeout(() => {
+        submitBtn.disabled = false;
+      }, 3000);
 
       const username = DOMPurify.sanitize(
         document.getElementById("userInput").value.trim()
@@ -120,14 +92,26 @@ document.addEventListener("DOMContentLoaded", () => {
       const passInputConfirm = DOMPurify.sanitize(
         document.getElementById("passInputConfirm").value.trim()
       );
-      const errorMsg = document.getElementById("errorMsg"); // remove this
 
       const userErrorMsg = document.getElementById("userErrorMsg");
       const passErrorMsg = document.getElementById("passErrorMsg");
       const seconds = 3000;
+      
+      if (username.length < 8){
+        let msg = "Username must be at least 8 characters long.";
+        showErrorMsg(userErrorMsg, msg, 3000);
+        return;
+      }
 
+      if (!/^[a-z_0-9]+$/.test(username)){
+        let msg = "Username must only have a-z, 0-9 and underscore";
+        showErrorMsg(userErrorMsg, msg, seconds);
+        return;
+      }
+      
       if (password !== passInputConfirm) {
-        showErrorMsg(errorMsg, "Password doesn't match", 3000);
+        let msg = "Password doesn't match";
+        showErrorMsg(passErrorMsg, msg, 3000);
         return;
       }
 
@@ -159,12 +143,11 @@ document.addEventListener("DOMContentLoaded", () => {
           window.location.href = "login.php";
         } else {
           console.error("Registration failed:", data.message);
-          // Hides error message after 3 seconds
-          showErrorMsg(errorMsg, data.message, 3000);
+          showErrorMsg(passErrorMsg, data.message, 3000);
         }
       } catch (error) {
         console.error("An error occurred:", error);
-        showErrorMsg(errorMsg, error.msg, 3000);
+        showErrorMsg(passErrorMsg, error, 3000);
       }
     });
 });
