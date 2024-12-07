@@ -11,13 +11,13 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("s", $username);
 $stmt->execute();
 if (!$result = $stmt->get_result()){
-  json_encode([
+  echo json_encode([
     "status" => "success",
     "message" => "Username is valid!"
   ]);
   exit();
 }
-json_encode([
+echo json_encode([
   "status" => "error",
   "message" => "Username is unavailable!"
 ]);
