@@ -29,30 +29,28 @@ $LOGIN_JS = "../assets/js/login.js";
 
         <form id="login-form" class="login-form">
 
+          <label for="userInput">Username:</label>
           <div class="user-container">
-            <label for="userInput">Username:</label>
             <input type="text" id="userInput" autocomplete="off" required />
           </div>
 
+          <label for="passInput">Password:</label>
           <div class="pass-container">
-            <label for="passInput">Password:</label>
             <input type="password" id="passInput" autocomplete="off" required />
             <input type="button" id="passToggle" value="Show" />
 
-            <div id="errorMsg" class="error-msg">
-              <!-- password errors here! -->
-              <!-- "The username or password you entered is incorrect." -->
-              <!-- "Something went wrong. Unable to log in. Please refresh and try again." -->
-              <!-- "We couldn't find an account with those credentials. Please sign up if you're new." add link of register -->
-            </div>
           </div>
-
-          <div class="sign-up-container">
-            <a href="./register.php">Signup</a>
+          <div id="errorMsg" class="error-msg">
           </div>
 
           <div class="btn-container">
-            <input type="submit" id="submitBtn" class="submit-btn" value="Submit"/>
+            <input type="submit" id="submitBtn" class="submit-btn btn btn-info" value="Login" />
+          </div>
+
+          <hr>
+
+          <div class="sign-up-container">
+            <a class="btn btn-success" href="./register.php">Signup</a>
           </div>
 
         </form>
