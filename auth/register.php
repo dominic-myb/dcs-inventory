@@ -31,8 +31,8 @@ $REGISTER_JS_PATH = "../assets/js/register.js";
         </div>
 
         <div class="form-container">
-          <form id="registration-form">
-            
+          <form id="registrationForm">
+
             <label for="fnameInput">Firstname:</label>
             <input type="text" id="fnameInput" name="fname" autocomplete="off" required>
 
@@ -41,36 +41,31 @@ $REGISTER_JS_PATH = "../assets/js/register.js";
 
             <label for="userInput">Username:</label>
             <input type="text" id="userInput" name="user" autocomplete="off" required>
-            <div id="userErrorMsg" class="error-message">
-              <!-- // FIXME: -->
-              <!-- Display here the error for usernames: -->
-              <!-- "Oops! That username is already in use." -->
-              <!-- "Usernames can only contain letters, numbers, and underscores." -->
-              <!-- "Username cannot be empty." -->
-            </div>
 
-            <label for="passInput">Password:</label> 
+            <label for="passInput">Password:</label>
             <input type="password" id="passInput" name="pass" autocomplete="off" required>
 
             <label for="passInputConfirm">Confirm Password:</label>
             <input type="password" id="passInputConfirm" name="passConfirm" autocomplete="off" required>
 
-            <div id="passErrorMsg" class="error-message">
-              <!-- // FIXME: -->
-              <!-- Display password Error: -->
-              <!-- "Password must include at least one uppercase letter, one number, and one special character." -->
-              <!-- "Password must be at least 8 characters long." -->
-              <!-- "Passwords do not match. Please try again." -->
-              <!-- "Avoid using commonly used passwords for better security." -->
-              <!-- "Password cannot be empty." -->
-              <!-- "Use only letters, numbers, and symbols in your password." -->
+            <div class="pass-strength-container">
+              <label for="passStrength">Password Strength:</label>
+              <meter id="passStrength" min="0" max="5" value="0"></meter>
+              <p id="passStrengthText">Weak</p>
+            </div>
+
+            <div id="errorMsg" class="error-message">
             </div>
 
             <div class="submit-btn-container">
-              <input type="submit" value="Submit" id="submitBtn">
+              <input type="submit" value="Submit" id="submitBtn" class="btn btn-info">
             </div>
-            
+
           </form>
+          <hr>
+          <div class="login-container">
+            <a href="./login.php" class="btn btn-warning">Login</a>
+          </div>
         </div>
 
       </div>
