@@ -1,23 +1,5 @@
-/* 
-  TODO: FEAT: WEAK - MODERATE - STRONG PASSWORD INDICATOR | RED | ORANGE | GREEN
-  TODO: ADD API FOR COMMON PASSWORDS
-  * CRITERIA: 
-  ? WEAK === 0-2 POINTS + < 8 CHARS
-  * * NO COMBINATION || < 8 CHARS 
-  ? MODERATE === >= 3 POINTS + !> 12 CHARS
-  * * IN THE API COMMON PASSWORDS || 8-12 CHARS
-  ? STRONG === >12 CHARS + 5 POINTS
-  * * > 12 CHARS || ALL COMBINATIONS CHECK || NOT IN API COMMON PASSWORD DICTIONARY
-
-  TODO:
-  1. FIND HEX COLOR FOR RED, ORANGE, GREEM
-  ?ADD A NEW PHP TO CHECK IF USERNAME IS AVAILABLE? 
-  RED: #FF6961
-  ORANGE: #FFB54C
-  GREEN: #7ABD7E
-*/
-
 document.addEventListener("DOMContentLoaded", () => {
+  /***** SHOW AND HIDE ERROR FUNCTION *****/
   function showErrorMsg(id, msg, time) {
     const pTag = document.createElement("p");
     pTag.textContent = msg;
@@ -30,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, time);
   }
 
-  // ?MAKE THIS RETURNS INTEGER?
+  /***** PASSWORD STRENGTH CHECKER RETURNS INT *****/
   function passwordStrengthChecker(password) {
     const standardLength = password.length >= 8;
     const hasLowercase = /[a-z]/.test(password);
@@ -44,6 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return strengthScore;
   }
 
+  /***** PASSWORD TYPING LISTENER *****/
   document.getElementById("passInput").addEventListener("keyup", async (e) => {
     e.preventDefault();
     const password = document.getElementById("passInput").value.trim();
@@ -58,6 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     else passStrengthTextId.textContent = "Weak";
   });
 
+  /***** FORM SUBMISSION LISTENER *****/
   document.getElementById("registrationForm").addEventListener("submit", async (e) => {
     e.preventDefault();
 

@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+  /***** SEARCH BAR TYPING LISTENER *****/
   document.getElementById("search-bar").addEventListener("keyup", async function () {
     const query = this.value;
 
