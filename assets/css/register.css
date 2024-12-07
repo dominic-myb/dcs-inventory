@@ -68,20 +68,31 @@ body {
   border-top: 1px solid black;
 }
 
-#registration-form input {
+#registrationForm input[type="text"],
+input[type="password"] {
   width: 100%;
   margin-bottom: 0.5rem;
 }
 
+#registrationForm input[type="text"],
+input[type="password"] {
+  border-radius: 0.2rem;
+  border: 1px solid black;
+}
+
 .error-message {
-  display: none;
+  display: flex;
+  height: 1.5rem;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 0.2rem;
   align-items: center;
   justify-content: center;
-  background-color: var(--light);
 }
 
 .error-message p {
   margin: 0;
+  color: #000;
 }
 
 .submit-btn-container {
@@ -90,5 +101,31 @@ body {
   justify-content: center;
   margin-top: 1rem;
 }
+.submit-btn-container input[type="submit"] {
+  border: 1px solid black;
+  width: 50%;
+}
 
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login-container a {
+  text-decoration: none;
+  border: 1px solid black;
+  width: 50%;
+}
+
+#passStrength {
+  width: 100%;
+}
+
+meter {
+  height: 20px;
+}
+
+#errorMsg {
+  background-color: transparent;
+}
 /* TODO: ADD RESPONSIVE STYLING AND UPDATE HTML IDs AND CLASSES */
