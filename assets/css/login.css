@@ -17,7 +17,7 @@
   --font-size: 16px;
   --login-form-w: 300px;
   --h1-font-size: 32px;
-  --inc-pass-font-size: 11px;
+  --inc-pass-font-size: 16px;
 }
 
 html,
@@ -76,29 +76,30 @@ body {
   justify-content: center;
 }
 
-.btn-container input[type="submit"] {
+.submit-btn {
   /* ADD STYLE FOR BUTTON, BOOTSTRAP*/
   width: 50%;
-  border-radius: 0.2rem;
-  padding: 5px;
   background-color: var(--front);
   border: 1px solid var(--bg-color);
-  color: var(--main-color);
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+  color: #fff;
 }
 
 /* FIXME: fix the alignment of passToggle */
 #errorMsg {
-  display: none;
+  display: flex;
+  height: 1vh;
   align-items: center;
   justify-content: center;
   background-color: var(--fg-color);
-  color: rgb(200, 0, 0);
+  color: #FFB54C;
   padding: 10px;
   margin-bottom: 0.5rem;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
   font-size: var(--inc-pass-font-size);
   border-radius: 0.2rem;
+  background-color: transparent;
+  padding: 20px;
 }
 
 #errorMsg p {
@@ -128,6 +129,19 @@ body {
   font-size: 14px;
   cursor: pointer;
   padding: 5px;
+}
+
+.sign-up-container{
+  display: flex;
+  justify-content: center;
+
+}
+
+.sign-up-container a{
+  text-decoration: none;
+  color: #fff;
+  border: 1px solid black;
+  width: 50%;
 }
 
 /***** EXTRA-SMALL SCREEN SIZE *****/
