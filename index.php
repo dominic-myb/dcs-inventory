@@ -1,4 +1,10 @@
 <?php
+session_start();
+if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+  header("Location: ./auth/login.php");
+  exit();
+}
+
 include("./backend/db_config.php");
 $PAGE_TITLE = "Inventory Management System";
 $BOOTSTRAP_CSS_PATH = "./assets/vendors/css/bootstrap.min.css";
