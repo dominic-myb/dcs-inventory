@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-
+session_start();
 include("db_config.php");
 
 $data = json_decode(file_get_contents('php://input'));
@@ -14,18 +14,19 @@ $stmt->bind_param("ss", $username, $password);
 $stmt->execute();
 $res = $stmt->get_result();
 
-if($res->num_rows === 0){
+if ($res->num_rows > 0) {
+  $_SESSION['loggedin'] = true;
+  $_SESSION['username'] = $username;
   echo json_encode([
-    "status" => "error",
-    "message" => "Invalid Username or Password"
+    "status" => "success",
+    "message" => "Login Successful!"
   ]);
   exit();
 }
 echo json_encode([
-  "status" => "success",
-  "message" => "Login Successful!"
+  "status" => "error",
+  "message" => "Invalid Username or Password"
 ]);
-
 
 $stmt->close();
 $conn->close();
