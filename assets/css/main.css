@@ -14,6 +14,23 @@ body {
   background-color: whitesmoke;
 }
 
+.navbar {
+  height: 50px;
+  background-color: red;
+  text-align: center;
+  justify-content: right;
+  vertical-align: middle;
+}
+
+.nav-list {
+  list-style-type: none;
+}
+
+.nav-list li {
+  display: inline;
+  margin-right: 15px;
+}
+
 .page-title {
   display: block;
   margin-top: 5vh;

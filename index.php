@@ -13,6 +13,7 @@ $JQUERY_PATH = "./assets/vendors/jquery-3.7.1.min.js";
 $BOOTSTRAP_JS_PATH = "./assets/vendors/js/bootstrap.min.js";
 $MAIN_JS_PATH = "./assets/js/main.js";
 $ICON_IMG_PATH = "./assets/imgs/dcs-logo-round.png";
+$username = $_SESSION['username'];
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +29,12 @@ $ICON_IMG_PATH = "./assets/imgs/dcs-logo-round.png";
 </head>
 
 <body>
+  <nav class="navbar">
+    <ul class="nav-list">
+      <li><?= $username ?></li>
+      <li><a href="./backend/logout.php" class="btn btn-danger">Logout</a></li>
+    </ul>
+  </nav>
   <main>
     <!-- ########## START OF PAGE HEADER IN INDEX.HTML ########### -->
 
@@ -35,6 +42,7 @@ $ICON_IMG_PATH = "./assets/imgs/dcs-logo-round.png";
       <div class="row justify-content-center">
 
         <h1>DCS <?= $PAGE_TITLE ?></h1>
+        <h2><?= $username ?></h2>
 
         <div class="col-auto">
           <label for="search-bar" class="form-label">
