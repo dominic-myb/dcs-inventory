@@ -14,9 +14,10 @@
   --heading-col: #30c5ff;
 
   /* SIZES */
-  --m-font-size: 16px;
+  --font-size: 16px;
   --h1-font-size: 32px;
   --w-register-form: 300px;
+  --err-font-size: 12px;
 }
 
 html,
@@ -93,6 +94,7 @@ input[type="password"] {
 .error-message p {
   margin: 0;
   color: #000;
+  font-size: var(--err-font-size);
 }
 
 .submit-btn-container {
@@ -128,4 +130,70 @@ meter {
 #errorMsg {
   background-color: transparent;
 }
-/* TODO: ADD RESPONSIVE STYLING AND UPDATE HTML IDs AND CLASSES */
+
+/***** EXTRA-SMALL SCREEN SIZE *****/
+@media (max-width: 575px) {
+  :root {
+    /***** SIZES *****/
+    --font-size: 16px;
+    --h1-font-size: 32px;
+    --w-register-form: 300px;
+    --err-font-size: 12px;
+  }
+}
+
+/***** SMALL SCREEN SIZE *****/
+@media (min-width: 576px) {
+  :root {
+    /***** SIZES *****/
+    --font-size: 16.5px;
+    --h1-font-size: 34px;
+    --w-register-form: 320px;
+    --err-font-size: 12.5px;
+  }
+}
+
+/***** MEDIUM SCREEN SIZE *****/
+@media (min-width: 768px) {
+  :root {
+    /***** SIZES *****/
+    --font-size: 17px;
+    --h1-font-size: 36px;
+    --w-register-form: 340px;
+    --err-font-size: 13px;
+  }
+}
+
+/***** LARGE SCREEN SIZE *****/
+@media (min-width: 992px) {
+  :root {
+    /***** SIZES *****/
+    --font-size: 17.5px;
+    --h1-font-size: 38px;
+    --w-register-form: 360px;
+    --err-font-size: 13.5px;
+  }
+}
+
+/***** EXTRA-LARGE SCREEN SIZE *****/
+@media (min-width: 1200px) {
+  :root {
+    /***** SIZES *****/
+    --font-size: 18px;
+    --h1-font-size: 40px;
+    --w-register-form: 380px;
+    --err-font-size: 14px;
+  }
+}
+
+/***** EXTRA-EXTRA-LARGE SCREEN SIZE *****/
+@media (min-width: 1400px) {
+  :root {
+    /***** SIZES *****/
+    --font-size: 18.5px;
+    --h1-font-size: 42px;
+    --w-register-form: 400px;
+    --inc-pass-font-size: 16px;
+    --err-font-size: 14.5px;
+  }
+}
