@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(() => {
       id.style.backgroundColor = "transparent";
-      pTag.textContent = "";
+      pTag.remove();
     }, time);
   }
 
@@ -101,11 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "login.php";
       } else {
         console.error("Registration failed:", data.message);
-        showErrorMsg(passErrorMsg, data.message, 3000);
+        showErrorMsg(errorMsgId, data.message, 3000);
       }
     } catch (error) {
       console.error("An error occurred:", error);
-      showErrorMsg(passErrorMsg, error, 3000);
+      showErrorMsg(errorMsgId, error, 3000);
     }
   });
 });

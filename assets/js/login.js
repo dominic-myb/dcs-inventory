@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(() => {
       id.style.backgroundColor = "transparent";
-      pTag.textContent = "";
+      pTag.remove();
     }, time);
   }
 
@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
   /***** FORM SUBMISSION *****/
   document.getElementById("login-form").addEventListener("submit", async (e) => {
     e.preventDefault();
-		
+
     const submitBtn = document.getElementById("submitBtn");
 
     submitBtn.disabled = true;
