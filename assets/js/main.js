@@ -2,8 +2,19 @@ document.addEventListener("DOMContentLoaded", function () {
   /***** SEARCH BAR TYPING LISTENER *****/
   document.getElementById("searchBar").addEventListener("keyup", async function () {
     const query = this.value;
-
-    const response = await fetch(`./backend/search.php?q=${query}`);
+    const token = document.getElementById("token").value;
+    const formData = {
+      q: query,
+      token: token,
+    };
+    const response = await fetch(`./backend/search.php`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "CSRF-Token": token,
+      },
+      body: JSON.stringify(formData),
+    });
     const data = await response.json();
 
     updateTable(data);
