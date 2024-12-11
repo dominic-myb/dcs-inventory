@@ -1,4 +1,8 @@
 <?php
+session_start();
+if (empty($_SESSION['csrf_token'])) {
+  $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Generate a secure CSRF token
+}
 include("../backend/db_config.php");
 $PAGE_TITLE = "LOGIN";
 $ICON_IMG_PATH = "../assets/imgs/dcs-logo-round.png";
@@ -28,6 +32,7 @@ $LOGIN_JS = "../assets/js/login.js";
         <h1>LOGIN</h1>
 
         <form id="login-form" class="login-form">
+          <input type="hidden" id="csrfToken" name="csrf_token" value="<?= $_SESSION['csrf_token'] ?? ''; ?>">
 
           <label for="userInput">Username:</label>
           <div class="user-container">
