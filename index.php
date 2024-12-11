@@ -42,16 +42,16 @@ $username = $_SESSION['username'];
       <div class="row justify-content-center">
 
         <h1>DCS <?= $PAGE_TITLE ?></h1>
-        <h2><?= $username ?></h2>
 
         <div class="col-auto">
-          <label for="search-bar" class="form-label">
+          <label for="searchBar" class="form-label">
             Search:
           </label>
         </div>
 
         <div class="col-auto">
-          <input type="text" id="search-bar" class="form-control" placeholder="Search...">
+          <input type="text" id="searchBar" class="form-control" placeholder="Search...">
+          <input type="hidden" id="token" value="<?= $_SESSION['csrf_token']; ?>">
         </div>
 
         <div class="col-auto">
@@ -69,7 +69,7 @@ $username = $_SESSION['username'];
 
     <!-- ########## END OF PAGE HEADER IN INDEX.HTML ########### -->
 
-    <div id="search-result"></div>
+    <div id="searchResult"></div>
 
     <!-- ########## START OF ITEM TABLE IN INDEX.HTML ########### -->
 
@@ -85,12 +85,12 @@ $username = $_SESSION['username'];
             <th scope="col">Action</th>
           </tr>
         </thead>
-        <tbody id="table-body">
+        <tbody id="tableBody">
           <?php
           $sql = "SELECT * FROM items";
           $res = $conn->query($sql);
-          if (mysqli_num_rows($res) > 0) {
-            while ($row = mysqli_fetch_assoc($res)) { ?>
+          if ($res->num_rows > 0) {
+            while ($row = $res->fetch_assoc()) { ?>
 
               <tr scope="row">
                 <td><?= $row['item_name'] ?></td>
