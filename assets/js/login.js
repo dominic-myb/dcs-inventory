@@ -42,15 +42,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const username = DOMPurify.sanitize(document.getElementById("userInput").value.trim());
     const password = DOMPurify.sanitize(document.getElementById("passInput").value.trim());
+    const token = document.getElementById("csrfToken").value;
     const errorMsg = document.getElementById("errorMsg");
-
+    const formData = {
+      username: username,
+      password: password,
+      csrf_token: token,
+    };
     try {
       const response = await fetch("../backend/login.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "CSRF-Token": csrfToken,
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
