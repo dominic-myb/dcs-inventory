@@ -1,22 +1,28 @@
 document.addEventListener("DOMContentLoaded", function () {
   /***** SEARCH BAR TYPING LISTENER *****/
-  document.getElementById("search-bar").addEventListener("keyup", async function () {
+  document.getElementById("searchBar").addEventListener("keyup", async function () {
     const query = this.value;
 
     const response = await fetch(`./backend/search.php?q=${query}`);
     const data = await response.json();
 
-    const result = document.getElementById("table-body");
+    updateTable(data);
+  });
+
+  /***** START OF TABLE UPDATE *****/
+  function updateTable(data) {
+    const result = document.getElementById("tableBody");
+    const searchResult = document.getElementById("searchResult");
     result.innerHTML = "";
 
     if (data.length === 0) {
-      document.getElementById("search-result").style.display = "none";
+      searchResult.style.display = "none";
       result.innerHTML = `
           <tr scope="row">
             <td colspan="6">0 Item Listed!</td>
           </tr>`;
     } else {
-      document.getElementById("search-result").style.display = "block";
+      searchResult.style.display = "block";
       data.forEach((item) => {
         result.innerHTML += `
             <tr scope="row">
@@ -33,5 +39,5 @@ document.addEventListener("DOMContentLoaded", function () {
             `;
       });
     }
-  });
+  }
 });
