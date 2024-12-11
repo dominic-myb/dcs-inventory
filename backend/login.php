@@ -6,8 +6,19 @@ include("db_config.php");
 $data = json_decode(file_get_contents('php://input'));
 $username = $data->username ?? '';
 $password = $data->password ?? '';
-$password = hash('sha256', $password);
+$submittedToken = $data->csrf_token ?? '';
 
+$sessionToken = $_SESSION['csrf_token'] ?? '';
+if (empty($sessionToken) || $submittedToken !== $sessionToken) {
+  http_response_code(403); // Forbidden
+  echo json_encode([
+    'status' => 'error',
+    'message' => 'Invalid or missing CSRF token.'
+  ]);
+  exit();
+}
+
+$password = hash('sha256', $password);
 $sql = "SELECT username, hashed_password FROM accounts WHERE username=? and hashed_password=?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $username, $password);
