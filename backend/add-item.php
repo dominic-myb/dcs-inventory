@@ -1,18 +1,27 @@
 <?php
-include("db_config.php");
 header('Content-Type: application/json');
 
-/*** GET THE INPUT FROM JSON ***/
+// VALIDATE INPUT
 $data = json_decode(file_get_contents('php://input'));
+if ($data === null) {
+  http_response_code(400);
+  echo json_encode([
+    "status" => "error",
+    "message" => "Invalid JSON input.",
+  ]);
+  exit();
+}
 
-$item_name = $data->item_name ?? '';
-$quantity = $data->quantity ?? '';
-$location = $data->location ?? '';
-$description = $data->description ?? '';
-$status = $data->status ?? '';
+/*** GET AND SANITIZE INPUT ***/
+include("db_config.php");
+$item_name = $conn->real_escape_string($data->item_name ?? '');
+$quantity = $conn->real_escape_string($data->quantity ?? '');
+$location = $conn->real_escape_string($data->location ?? '');
+$description = $conn->real_escape_string($data->description ?? '');
+$status = $conn->real_escape_string($data->status ?? '');
 
 /*** INPUT VALIDATION ***/
-if (empty($item_name) || empty($quantity) || !is_numeric($quantity) || empty($location) || empty($description) || empty($status)) {
+if (empty($item_name) || empty($quantity) || empty($location) || empty($description) || empty($status) || !is_numeric($quantity)) {
   http_response_code(400);
   echo json_encode([
     "status" => "error",
@@ -20,13 +29,6 @@ if (empty($item_name) || empty($quantity) || !is_numeric($quantity) || empty($lo
   ]);
   exit();
 }
-
-/*** SANITIZE INPUT ***/
-$item_name = $conn->real_escape_string($item_name);
-$quantity = $conn->real_escape_string($quantity);
-$location = $conn->real_escape_string($location);
-$description = $conn->real_escape_string($description);
-$status = $conn->real_escape_string($status);
 
 /*** TRY TO INSERT IN THE TABLE items IN dcs_db ***/
 try {
