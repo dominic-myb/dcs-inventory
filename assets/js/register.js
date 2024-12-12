@@ -12,6 +12,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }, time);
   }
 
+  function inputFieldColorChange(inputField) {
+    const _inputField = document.querySelector(inputField);
+    _inputField.style.border = "2px solid #FF5733";
+    _inputField.addEventListener("focus", () => {
+      _inputField.style.border = "none";
+    });
+  }
+
   /***** PASSWORD STRENGTH CHECKER RETURNS INT *****/
   function passwordStrengthChecker(password) {
     const standardLength = password.length >= 8;
@@ -60,18 +68,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const seconds = 3000;
 
     if (username.length < 8) {
-      let msg = "Minimum length: 8 characters";
+      let msg = "Minimum length 8 characters";
       showErrorMsg(errorMsgId, msg, 3000);
+      inputFieldColorChange("#userInput");
       return;
     }
 
     if (!/^[a-z_0-9]+$/.test(username)) {
       let msg = "Only a-z, 0-9, or _ are allowed.";
       showErrorMsg(errorMsgId, msg, seconds);
+      inputFieldColorChange("#userInput");
       return;
     }
 
     if (password !== passInputConfirm) {
+      inputFieldColorChange("#passInput");
+      inputFieldColorChange("#passInputConfirm");
       let msg = "Password doesn't match";
       showErrorMsg(errorMsgId, msg, 3000);
       return;
