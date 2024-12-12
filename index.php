@@ -31,7 +31,7 @@ $username = $_SESSION['username'];
 <body>
   <nav class="navbar">
     <ul class="nav-list">
-      <li><?= $username ?></li>
+      <li style="color:#fff;"><?= $username ?></li>
       <li><a href="./backend/logout.php" class="btn btn-danger">Logout</a></li>
     </ul>
   </nav>
@@ -68,8 +68,6 @@ $username = $_SESSION['username'];
     </div>
 
     <!-- ########## END OF PAGE HEADER IN INDEX.HTML ########### -->
-
-    <div id="searchResult"></div>
 
     <!-- ########## START OF ITEM TABLE IN INDEX.HTML ########### -->
 
@@ -122,10 +120,10 @@ $username = $_SESSION['username'];
 
     <!-- ########## START OF ADD ITEM MODAL IN INDEX.HTML ########### -->
 
-    <form id="addItemForm">
-      <div id="add-item-modal" class="modal" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content">
+    <div id="add-item-modal" class="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <form id="addItemForm">
 
             <div class="modal-header">
               <h5 class="modal-title">Add Item</h5>
@@ -138,57 +136,72 @@ $username = $_SESSION['username'];
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-default">Item Name</span>
                 </div>
-                <input type="text" id="itemName" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                <input type="text" id="itemName" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" autocomplete="off" required />
               </div>
 
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-default">Quantity</span>
                 </div>
-                <input type="number" id="quantity" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                <input type="number" min="0" id="quantity" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" autocomplete="off" required />
               </div>
 
               <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-default">Location</span>
                 </div>
-                <input type="text" id="location" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                <input type="text" id="location" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" autocomplete="off" required />
               </div>
 
-              <div class="input-group">
+              <div class="input-group mb-4">
                 <div class="input-group-prepend">
-                  <span class="input-group-text">Description</span>
+                  <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
                 </div>
                 <textarea id="description" class="form-control" aria-label="With textarea"></textarea>
               </div>
 
-              <div class="input-group">
-                <input type="text" class="form-control" aria-label="Text input with dropdown button">
-                <div class="input-group-append">
-                  <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Status</button>
-                  <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <div role="separator" class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
-                  </div>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-default">Status</span>
                 </div>
+                <select name="status" id="status" class="btn btn-secondary btn-sm dropdown-toggle" autocomplete="off" required>
+                  <option class="status-option" value="In Good Condition">In Good Condition</option>
+                  <option class="status-option" value="In Bad Condition">In Bad Condition</option>
+                  <option class="status-option" value="Discontinued">Discontinued</option>
+                </select>
               </div>
 
             </div>
 
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-              <button type="submit" class="btn btn-primary">Save</button>
+              <button type="submit" class="btn btn-primary" id="saveBtn">Save</button>
             </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- ########### END OF ADD ITEM MODAL IN INDEX.HTML ############ -->
+    <!-- ########### START OF MESSAGE MODAL IN INDEX.HTML ############ -->
+    <div id="popupMsg" class="modal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h5 class="modal-title" id="popupTitle"></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+
+          <div class="modal-body" id="popupMsgContent">
 
           </div>
         </div>
       </div>
-    </form>
-    <!-- ########### END OF ADD ITEM MODAL IN INDEX.HTML ############ -->
+    </div>
+    <!-- ########### END OF MESSAGE MODAL IN INDEX.HTML ############ -->
   </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.0.1/purify.min.js"></script>
   <script src="<?= $BOOTSTRAP_JS_PATH ?>"></script>
   <script src="<?= $JQUERY_PATH ?>"></script>
   <script src="<?= $MAIN_JS_PATH ?>"></script>
