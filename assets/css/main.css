@@ -16,7 +16,7 @@ body {
 
 .navbar {
   height: 50px;
-  background-color: red;
+  background-color: #2a2d34;
   text-align: center;
   justify-content: right;
   vertical-align: middle;
@@ -59,7 +59,20 @@ td {
   vertical-align: middle;
   font-size: var(--font-size);
 }
-
+#description {
+  height: 38px;
+}
+#status {
+  width: 82%;
+  border-radius: 0.375rem;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.input-group-text {
+  border-radius: 0.375rem;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
 /***** EXTRA-SMALL SCREEN SIZE *****/
 @media (max-width: 575px) {
   :root {
