@@ -58,11 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
         },
         body: JSON.stringify(formData),
       });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
+      
       const data = await response.json();
 
       if (data.status === "success") {
