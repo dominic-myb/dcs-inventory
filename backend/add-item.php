@@ -22,11 +22,11 @@ if (empty($item_name) || empty($quantity) || !is_numeric($quantity) || empty($lo
 }
 
 /*** SANITIZE INPUT ***/
-$item_name = htmlspecialchars($item_name, ENT_QUOTES, 'UTF-8');
-$quantity = htmlspecialchars($quantity, ENT_QUOTES, 'UTF-8');
-$location = htmlspecialchars($location, ENT_QUOTES, 'UTF-8');
-$description = htmlspecialchars($description, ENT_QUOTES, 'UTF-8');
-$status = htmlspecialchars($status, ENT_QUOTES, 'UTF-8');
+$item_name = $conn->real_escape_string($item_name);
+$quantity = $conn->real_escape_string($quantity);
+$location = $conn->real_escape_string($location);
+$description = $conn->real_escape_string($description);
+$status = $conn->real_escape_string($status);
 
 /*** TRY TO INSERT IN THE TABLE items IN dcs_db ***/
 try {
