@@ -57,7 +57,7 @@ $username = $_SESSION['username'];
         <div class="col-auto">
           <div class="row">
             <div class="wrapper d-flex justify-content-start text-center">
-              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add-item-modal">
+              <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addItemModal">
                 Add Item
               </button>
             </div>
@@ -97,7 +97,7 @@ $username = $_SESSION['username'];
                 <td><?= $row['description'] ?></td>
                 <td><?= $row['status'] ?></td>
                 <td>
-                  <a href="update.php?update_id=<?= $row['id'] ?>" class="btn btn-primary">Update</a>
+                  <a href="#" class="update-btn btn btn-primary" data-id="<?= $row['id'] ?>" data-bs-toggle="modal" data-bs-target=".update-item-modal">Update</a>
                   <a href="delete.php?delete_id=<?= $row['id'] ?>" class="btn btn-danger">Delete</a>
                 </td>
               </tr>
@@ -120,7 +120,7 @@ $username = $_SESSION['username'];
 
     <!-- ########## START OF ADD ITEM MODAL IN INDEX.HTML ########### -->
 
-    <div id="add-item-modal" class="modal" tabindex="-1">
+    <div id="addItemModal" class="modal" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
           <form id="addItemForm">
@@ -183,6 +183,7 @@ $username = $_SESSION['username'];
       </div>
     </div>
     <!-- ########### END OF ADD ITEM MODAL IN INDEX.HTML ############ -->
+    <?php include("./includes/modals/update_item.php"); ?>
     <!-- ########### START OF MESSAGE MODAL IN INDEX.HTML ############ -->
     <div id="popupMsg" class="modal" tabindex="-1">
       <div class="modal-dialog">
