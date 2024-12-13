@@ -82,15 +82,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (password !== passInputConfirm) {
-      inputFieldColorChange("#passInput");
-      inputFieldColorChange("#passInputConfirm");
       let msg = "Password doesn't match";
       showErrorMsg(errorMsgId, msg, 3000);
+      inputFieldColorChange("#passInput");
+      inputFieldColorChange("#passInputConfirm");
       return;
     }
 
     const firstname = DOMPurify.sanitize(document.getElementById("fnameInput").value.trim());
-
     const lastname = DOMPurify.sanitize(document.getElementById("lnameInput").value.trim());
 
     try {
