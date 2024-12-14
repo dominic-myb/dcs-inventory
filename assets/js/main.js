@@ -2,27 +2,17 @@
 document.addEventListener("DOMContentLoaded", function () {
   /***** SEARCH BAR TYPING LISTENER *****/
   document.getElementById("searchBar").addEventListener("keyup", async function () {
-    // GET THE QUERY VALUE PLUS THE TOKEN HASH
     const query = this.value;
     const token = document.getElementById("token").value;
-    const formData = {
-      q: query,
-      token: token,
+    const fetchParam = {
+      url: `./backend/search.php`,
+      method: "POST",
+      headers: { "Content-Type": "applicaiton/json", "CSRF-Token": token },
+      body: { q: query, token: token },
     };
 
-    // SUBMIT QUERY
     try {
-      const response = await fetch(`./backend/search.php`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "CSRF-Token": token,
-        },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await response.json(); // GET RESPONSE FROM SERVER
-      loadTableData(data);
+      loadTableData(await fetchingData(fetchParam));
     } catch (error) {
       console.lerror(`Error: ${error}`);
     }
@@ -31,63 +21,53 @@ document.addEventListener("DOMContentLoaded", function () {
   /***** ADDING ITEM *****/
   document.getElementById("addItemForm").addEventListener("submit", async (e) => {
     e.preventDefault();
-    // SANITIZE FORM DATA
-    const itemName = DOMPurify.sanitize(document.getElementById("itemName").value.trim());
-    const quantity = DOMPurify.sanitize(document.getElementById("quantity").value.trim());
-    const location = DOMPurify.sanitize(document.getElementById("location").value.trim());
-    const description = DOMPurify.sanitize(document.getElementById("description").value.trim());
-    const status = DOMPurify.sanitize(document.getElementById("status").value.trim());
-
-    if (itemName === "" || quantity === "" || location === "" || description === "" || status === "") {
-      console.error("All fields are required and must not be empty!");
-      return;
-    }
-
-    if (quantity < 0) {
-      console.error("Quantity can't be lower than zero.");
-      return;
-    }
 
     const formData = {
-      item_name: itemName,
-      quantity: quantity,
-      location: location,
-      description: description,
-      status: status,
+      item_name: DOMPurify.sanitize(document.getElementById("itemName").value.trim()),
+      quantity: DOMPurify.sanitize(document.getElementById("quantity").value.trim()),
+      location: DOMPurify.sanitize(document.getElementById("location").value.trim()),
+      description: DOMPurify.sanitize(document.getElementById("description").value.trim()),
+      status: DOMPurify.sanitize(document.getElementById("status").value.trim()),
+    };
+    const missingkey = hasMissingValues(formData);
+
+    if (missingkey) {
+      console.error(`Error: Value for key '${missingKey}' is missing or empty!`);
+      return;
+    } else {
+      console.log("All keys have valid values.");
+    }
+
+    const fetchParam = {
+      url: `./backend/add-item.php`,
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: { item_name: itemName, quantity: quantity, location: location, description: description, status: status },
     };
 
     try {
-      const response = await fetch(`./backend/add-item.php`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const data = await fetchingData(fetchParam);
 
-      // HIDES THE MODAL FORM AFTER SUBMIT
       const addItemModal = document.getElementById("addItemModal");
       const modalInstance = bootstrap.Modal.getInstance(addItemModal) || new bootstrap.Modal(addItemModal);
       modalInstance.hide();
 
-      const data = await response.json();
       if (data.status === "success") {
         popupSystemMessage(`System Message: ${data.message}`);
 
         try {
-          // !!! MAKE A FUNCTION WITH PARAMETERS FOR FETCHING
-          const response = await fetch(`./backend/get-item.php`); // !
-          const data = await response.json();
+          const fetchParam = { url: `./backend/get-item.php` };
+          const data = await fetchingData(fetchParam);
           loadTableData(data);
         } catch (error) {
-          console.error("Error: ", error);
+          console.error(`Error ${error}`);
         }
       } else {
         console.error(`System Message: ${data.message}`);
         popupSystemMessage(`System Message: ${data.message}`);
       }
     } catch (error) {
-      console.error(error.message);
+      console.error(`Error: ${error.message}`);
     }
   });
 
@@ -124,16 +104,12 @@ document.addEventListener("DOMContentLoaded", function () {
       `;
         });
       }
-      return true;
     } catch (error) {
       console.error(`Error ${error.message}`);
-      return false;
     }
   }
 
-  const updateButtons = document.querySelectorAll(".update-btn");
-
-  updateButtons.forEach((button) => {
+  document.querySelectorAll(".update-btn").forEach((button) => {
     button.addEventListener("click", async function () {
       const updateId = this.getAttribute("data-id");
       const itemName = document.getElementById("updateItemName");
@@ -141,17 +117,14 @@ document.addEventListener("DOMContentLoaded", function () {
       const location = document.getElementById("updateLocation");
       const description = document.getElementById("updateDescription");
       const itemStatus = document.getElementById("updateStatus");
-
+      const fetchParam = {
+        url: `./backend/select_item.php`,
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: { update_id: updateId },
+      };
       try {
-        const response = await fetch(`./backend/select_item.php`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ update_id: updateId }),
-        });
-
-        const data = await response.json();
+        const data = await fetchingData(fetchParam);
 
         if (data.status === "success") {
           itemName.value = data.item_name;
@@ -165,15 +138,35 @@ document.addEventListener("DOMContentLoaded", function () {
             }
           });
 
-          console.log(data.message);
+          console.log(`Status: ${data.status}\nMessage: ${data.message}`);
         } else {
-          console.error(`Status: ${data.status}\n Message: ${data.message}`); // !
+          console.error(`Status: ${data.status}\nMessage: ${data.message}`);
         }
       } catch (error) {
         console.error(`Error fetching data: ${error}`);
+        return false;
       }
     });
   });
+
+  function hasMissingValues(dictionary) {
+    for (const key in dictionary) {
+      if (!dictionary[key]) {
+        return key;
+      }
+    }
+    return null;
+  }
+
+  /***** FETCHING DATA FUNCTION *****/
+  async function fetchingData(fetchParam) {
+    const response = await fetch(fetchParam.url, {
+      method: fetchParam.method,
+      headers: fetchParam.headers,
+      body: JSON.stringify(fetchParam.body),
+    });
+    return await response.json();
+  }
 
   /***** TIMED MODAL MESSAGE SHOW *****/
   function popupSystemMessage(title, message) {
