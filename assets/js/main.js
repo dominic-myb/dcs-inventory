@@ -1,5 +1,7 @@
 // TODO: SEE LINE 78, MAKE ERROR CONSOLE FORMAT LIKE IN LINE 170
 document.addEventListener("DOMContentLoaded", function () {
+  const updateBtns = document.querySelectorAll(".update-btn");
+  addEventToNewButton(updateBtns);
   /***** SEARCH BAR TYPING LISTENER *****/
   document.getElementById("searchBar").addEventListener("keyup", async function () {
     const query = this.value;
@@ -42,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
       url: `./backend/add-item.php`,
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: { item_name: itemName, quantity: quantity, location: location, description: description, status: status },
+      body: formData,
     };
 
     try {
@@ -71,8 +73,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // FIXME: ISSUE AFTER ADDING AN ITEM THEN PRESSING THE BUTTON UPDATE FOR THE LAST ITEM THE MODAL DOESN'T CONTAIN PREVIOUS DATA
-
   /***** GET/SHOW ITEMS FUNCTION *****/
   function loadTableData(data) {
     try {
@@ -97,57 +97,61 @@ document.addEventListener("DOMContentLoaded", function () {
             <td>${item.description}</td>
             <td>${item.status}</td>
             <td>
-              <a href="#" class="btn btn-primary" data-id="${item.id}" data-bs-toggle="modal" data-bs-target=".update-item-modal">Update</a>
+              <a href="#" class="update-btn btn btn-primary" data-id="${item.id}" data-bs-toggle="modal" data-bs-target=".update-item-modal">Update</a>
               <a href="delete.php?delete_id=${item.id}" class="btn btn-danger">Delete</a>
             </td>
           </tr>
       `;
         });
+        const updateBtns = document.querySelectorAll(".update-btn");
+        addEventToNewButton(updateBtns);
       }
     } catch (error) {
       console.error(`Error ${error.message}`);
     }
   }
 
-  document.querySelectorAll(".update-btn").forEach((button) => {
-    button.addEventListener("click", async function () {
-      const updateId = this.getAttribute("data-id");
-      const itemName = document.getElementById("updateItemName");
-      const quantity = document.getElementById("updateQuantity");
-      const location = document.getElementById("updateLocation");
-      const description = document.getElementById("updateDescription");
-      const itemStatus = document.getElementById("updateStatus");
-      const fetchParam = {
-        url: `./backend/select_item.php`,
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: { update_id: updateId },
-      };
-      try {
-        const data = await fetchingData(fetchParam);
+  async function addEventToNewButton(updateBtns) {
+    updateBtns.forEach((button) => {
+      button.addEventListener("click", async function () {
+        const updateId = this.getAttribute("data-id");
+        const itemName = document.getElementById("updateItemName");
+        const quantity = document.getElementById("updateQuantity");
+        const location = document.getElementById("updateLocation");
+        const description = document.getElementById("updateDescription");
+        const itemStatus = document.getElementById("updateStatus");
+        const fetchParam = {
+          url: `./backend/select_item.php`,
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: { update_id: updateId },
+        };
+        try {
+          const data = await fetchingData(fetchParam);
 
-        if (data.status === "success") {
-          itemName.value = data.item_name;
-          quantity.value = data.quantity;
-          location.value = data.location;
-          description.value = data.description;
+          if (data.status === "success") {
+            itemName.value = data.item_name;
+            quantity.value = data.quantity;
+            location.value = data.location;
+            description.value = data.description;
 
-          Array.from(itemStatus.options).forEach((option) => {
-            if (option.value === data.item_status) {
-              option.selected = true;
-            }
-          });
+            Array.from(itemStatus.options).forEach((option) => {
+              if (option.value === data.item_status) {
+                option.selected = true;
+              }
+            });
 
-          console.log(`Status: ${data.status}\nMessage: ${data.message}`);
-        } else {
-          console.error(`Status: ${data.status}\nMessage: ${data.message}`);
+            console.log(`Status: ${data.status}\nMessage: ${data.message}`);
+          } else {
+            console.error(`Status: ${data.status}\nMessage: ${data.message}`);
+          }
+        } catch (error) {
+          console.error(`Error fetching data: ${error}`);
+          return false;
         }
-      } catch (error) {
-        console.error(`Error fetching data: ${error}`);
-        return false;
-      }
+      });
     });
-  });
+  }
 
   function hasMissingValues(dictionary) {
     for (const key in dictionary) {
