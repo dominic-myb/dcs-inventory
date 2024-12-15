@@ -19,6 +19,7 @@ try {
   }
 
   echo json_encode([
+    "item_id" => $row['id'],
     "item_name" => $row['item_name'],
     "quantity" => $row['quantity'],
     "location" => $row['location'],
