@@ -116,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
     updateBtns.forEach((button) => {
       button.addEventListener("click", async function () {
         const updateId = this.getAttribute("data-id");
+        const itemId = document.getElementById("itemId");
         const itemName = document.getElementById("updateItemName");
         const quantity = document.getElementById("updateQuantity");
         const location = document.getElementById("updateLocation");
@@ -131,6 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
           const data = await fetchingData(fetchParam);
 
           if (data.status === "success") {
+            itemId.value = data.item_id;
             itemName.value = data.item_name;
             quantity.value = data.quantity;
             location.value = data.location;
@@ -153,6 +155,41 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   }
+
+  document.getElementById("updateItemForm").addEventListener("submit", async () => {
+    const formData = {
+      item_id: DOMPurify.sanitize(document.getElementById("itemId").value.trim()),
+      item_name: DOMPurify.sanitize(document.getElementById("updateItemName").value.trim()),
+      quantity: DOMPurify.sanitize(document.getElementById("updateQuantity").value.trim()),
+      location: DOMPurify.sanitize(document.getElementById("updateLocation").value.trim()),
+      description: DOMPurify.sanitize(document.getElementById("updateDescription").value.trim()),
+      item_status: DOMPurify.sanitize(document.getElementById("updateStatus").value.trim()),
+    };
+    const missingKey = hasMissingValues(formData);
+    if (missingKey) {
+      console.error(`Error: Value for key '${missingKey}' is missing or empty!`);
+      return;
+    } else {
+      console.log(`"All keys have valid values.`);
+    }
+    const fetchParam = {
+      url: `./backend/update_item.php`,
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: formData,
+    };
+    try {
+      const data = await fetchingData(fetchParam);
+      if (data.status === "success") {
+        console.log(data.message);
+        popupSystemMessage("System Message", data.message);
+      } else {
+        console.error(data.message);
+      }
+    } catch (error) {
+      console.error(`Error: ${error}`);
+    }
+  });
 
   function hasMissingValues(dictionary) {
     for (const key in dictionary) {
