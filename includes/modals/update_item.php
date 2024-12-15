@@ -9,7 +9,7 @@
         </div>
 
         <div class="modal-body">
-
+          <input type="hidden" name="itemId" id="itemId">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing-default">Item Name</span>
