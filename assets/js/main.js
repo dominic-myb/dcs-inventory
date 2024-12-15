@@ -1,5 +1,6 @@
 // TODO: SEE LINE 78, MAKE ERROR CONSOLE FORMAT LIKE IN LINE 170
 document.addEventListener("DOMContentLoaded", function () {
+  /***** UPDATE BUTTONS *****/
   const updateBtns = document.querySelectorAll(".update-btn");
   addEventToNewButton(updateBtns);
   /***** SEARCH BAR TYPING LISTENER *****/
@@ -31,9 +32,9 @@ document.addEventListener("DOMContentLoaded", function () {
       description: DOMPurify.sanitize(document.getElementById("description").value.trim()),
       status: DOMPurify.sanitize(document.getElementById("status").value.trim()),
     };
-    const missingkey = hasMissingValues(formData);
 
-    if (missingkey) {
+    const missingKey = hasMissingValues(formData);
+    if (missingKey) {
       console.error(`Error: Value for key '${missingKey}' is missing or empty!`);
       return;
     } else {
