@@ -98,7 +98,7 @@ $username = $_SESSION['username'];
                 <td><?= $row['status'] ?></td>
                 <td>
                   <a href="#" class="update-btn btn btn-primary" data-id="<?= $row['id'] ?>" data-bs-toggle="modal" data-bs-target=".update-item-modal">Update</a>
-                  <a href="delete.php?delete_id=<?= $row['id'] ?>" class="btn btn-danger">Delete</a>
+                  <a href="#" class="delete-btn btn btn-danger" data-id="<?= $row['id'] ?>" data-bs-toggle="modal" data-bs-target=".delete-item-modal">Delete</a>
                 </td>
               </tr>
 
@@ -184,6 +184,7 @@ $username = $_SESSION['username'];
     </div>
     <!-- ########### END OF ADD ITEM MODAL IN INDEX.HTML ############ -->
     <?php include("./includes/modals/update_item.php"); ?>
+    <?php include("./includes/modals/delete-item.php"); ?>
     <!-- ########### START OF MESSAGE MODAL IN INDEX.HTML ############ -->
     <div id="popupMsg" class="modal" tabindex="-1">
       <div class="modal-dialog">
