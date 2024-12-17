@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
   /***** UPDATE BUTTONS *****/
   const updateBtns = document.querySelectorAll(".update-btn");
   addEventToNewButton(updateBtns);
+  const deleteBtns = document.querySelectorAll(".delete-btn");
+  addDeleteEvent(deleteBtns);
   /***** SEARCH BAR TYPING LISTENER *****/
   document.getElementById("searchBar").addEventListener("keyup", async function () {
     const query = this.value;
@@ -99,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <td>${item.status}</td>
             <td>
               <a href="#" class="update-btn btn btn-primary" data-id="${item.id}" data-bs-toggle="modal" data-bs-target=".update-item-modal">Update</a>
-              <a href="delete.php?delete_id=${item.id}" class="btn btn-danger">Delete</a>
+              <a href="#" class="delete-btn btn btn-danger" data-id="${item.id}" data-bs-toggle="modal" data-bs-target=".delete-item-modal">Delete</a>
             </td>
           </tr>
       `;
@@ -126,7 +128,7 @@ document.addEventListener("DOMContentLoaded", function () {
           url: `./backend/select_item.php`,
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: { update_id: updateId },
+          body: { id: updateId },
         };
         try {
           const data = await fetchingData(fetchParam);
@@ -188,6 +190,55 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     } catch (error) {
       console.error(`Error: ${error}`);
+    }
+  });
+  async function addDeleteEvent(deleteBtns) {
+    deleteBtns.forEach((button) => {
+      button.addEventListener("click", async () => {
+        const deleteId = this.getAttribute("data-id");
+        const itemNameDisplay = document.getElementById("itemNameDisplay");
+        const fetchParam = {
+          url: `./backend/select_item.php`,
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: { id: deleteId },
+        };
+        try {
+          const data = await fetchingData(fetchParam);
+          if (data.status === "success") {
+            itemNameDisplay.innerHTML = data.item_name;
+            console.log(data.message);
+          } else {
+            console.error(data.message);
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      });
+    });
+  }
+
+  document.getElementById("deleteItemForm").addEventListener("submit", async () => {
+    const formData = { delete_id: DOMPurify.sanitize(document.getElementById("itemId").value.trim()) };
+    const missingKey = hasMissingValues(formData);
+    if (missingKey) {
+      return;
+    }
+    const fetchParam = {
+      url: "./backend/delete_item.php",
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: formData,
+    };
+    try {
+      const data = await fetchingData(fetchParam);
+      if (data === "success") {
+        console.log(data.message);
+      } else {
+        console.error(data.message);
+      }
+    } catch (error) {
+      console.error(error);
     }
   });
 
