@@ -1,15 +1,15 @@
 <?php
 header('Content-Type: application/json');
 $data = json_decode(file_get_contents('php://input'));
-$update_id = $data->update_id ?? '';
-if (!is_numeric($update_id)) {
+$item_id = $data->item_id ?? '';
+if (!is_numeric($item_id)) {
   exit();
 }
 try {
   include("db_config.php");
   $sql = "SELECT * FROM items WHERE id=?";
   $stmt = $conn->prepare($sql);
-  $stmt->bind_param("i", $update_id);
+  $stmt->bind_param("i", $item_id);
   $stmt->execute();
   $res = $stmt->get_result();
 

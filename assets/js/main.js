@@ -6,7 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const deleteBtns = document.querySelectorAll(".delete-btn");
   addDeleteEvent(deleteBtns);
   /***** SEARCH BAR TYPING LISTENER *****/
-  document.getElementById("searchBar").addEventListener("keyup", async function () {
+  document.getElementById("searchBar").addEventListener("keyup", async function (e) {
+    e.preventDefault();
+
     const query = this.value;
     const token = document.getElementById("token").value;
     const fetchParam = {
@@ -84,7 +86,7 @@ document.addEventListener("DOMContentLoaded", function () {
       tbody.innerHTML = "";
 
       if (data.length === 0) {
-        result.innerHTML = `
+        tbody.innerHTML = `
           <tr scope="row">
             <td colspan="6">0 Item Listed!</td>
           </tr>
@@ -128,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
           url: `./backend/select_item.php`,
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: { id: updateId },
+          body: { item_id: updateId },
         };
         try {
           const data = await fetchingData(fetchParam);
@@ -192,20 +194,23 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error(`Error: ${error}`);
     }
   });
+
   async function addDeleteEvent(deleteBtns) {
     deleteBtns.forEach((button) => {
-      button.addEventListener("click", async () => {
+      button.addEventListener("click", async function () {
         const deleteId = this.getAttribute("data-id");
+        const itemId = document.getElementById("itemId");
         const itemNameDisplay = document.getElementById("itemNameDisplay");
         const fetchParam = {
           url: `./backend/select_item.php`,
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: { id: deleteId },
+          body: { item_id: deleteId },
         };
         try {
           const data = await fetchingData(fetchParam);
           if (data.status === "success") {
+            itemId.value = data.item_id;
             itemNameDisplay.innerHTML = data.item_name;
             console.log(data.message);
           } else {
@@ -219,9 +224,11 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   document.getElementById("deleteItemForm").addEventListener("submit", async () => {
-    const formData = { delete_id: DOMPurify.sanitize(document.getElementById("itemId").value.trim()) };
+    const itemId = DOMPurify.sanitize(document.getElementById("itemId").value.trim());
+    const formData = { item_id: itemId };
     const missingKey = hasMissingValues(formData);
     if (missingKey) {
+      console.error("ID is missing");
       return;
     }
     const fetchParam = {
@@ -232,7 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
     try {
       const data = await fetchingData(fetchParam);
-      if (data === "success") {
+      if (data.status === "success") {
         console.log(data.message);
       } else {
         console.error(data.message);
