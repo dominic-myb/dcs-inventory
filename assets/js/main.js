@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const formData = {
       item_name: DOMPurify.sanitize(document.getElementById("itemName").value.trim()),
       quantity: DOMPurify.sanitize(document.getElementById("quantity").value.trim()),
-      location: DOMPurify.sanitize(document.getElementById("location").value.trim()),
+      location: DOMPurify.sanitize(document.getElementById("location").value.toUpperCase().trim()),
       description: DOMPurify.sanitize(document.getElementById("description").value.trim()),
       status: DOMPurify.sanitize(document.getElementById("status").value.trim()),
     };
@@ -61,7 +61,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (data.status === "success") {
         popupSystemMessage(`System Message: ${data.message}`);
-
+        document.getElementById("itemName").value = "";
+        document.getElementById("quantity").value = "";
+        document.getElementById("location").value = "";
+        document.getElementById("description").value = "";
+        document.getElementById("status").value = "In Good Condition";
         try {
           const fetchParam = { url: `./backend/get-item.php` };
           const data = await fetchingData(fetchParam);
