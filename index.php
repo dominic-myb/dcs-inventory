@@ -22,6 +22,9 @@ $username = $_SESSION['username'];
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
 	<link rel="stylesheet" href="<?= $BOOTSTRAP_CSS_PATH ?>">
 	<link rel="stylesheet" href="<?= $MAIN_CSS_PATH ?>">
 	<link rel="icon" type="image/x-icon" href="<?= $ICON_IMG_PATH ?>">
@@ -71,51 +74,55 @@ $username = $_SESSION['username'];
 
 		<!-- ########## START OF ITEM TABLE IN INDEX.HTML ########### -->
 
-		<div class="content table-responsive mx-auto primary-table col-sm-11 col-md-10 col-lg-9 col-xl-9 col-xxl-8">
-			<table class="table table-hover" id="items-table">
-				<thead>
-					<tr scope="row">
-						<th scope="col">Item Name</th>
-						<th scope="col">Quantity</th>
-						<th scope="col">Location</th>
-						<th scope="col">Description</th>
-						<th scope="col">Status</th>
-						<th scope="col">Action</th>
-					</tr>
-				</thead>
-				<tbody id="tableBody">
-					<?php
-					$sql = "SELECT * FROM items";
-					$res = $conn->query($sql);
-					if ($res->num_rows > 0) {
-						while ($row = $res->fetch_assoc()) { ?>
-
+		<div class="row justify-content-center">
+			<div class="col-12 col-md-10 col-lg-9">
+				<div class="table-responsive">
+					<table class="table table-hover" id="items-table">
+						<thead>
 							<tr scope="row">
-								<td><?= $row['item_name'] ?></td>
-								<td><?= $row['quantity'] ?></td>
-								<td><?= $row['location'] ?></td>
-								<td><?= $row['description'] ?></td>
-								<td><?= $row['status'] ?></td>
-								<td>
-									<a href="#" class="update-btn btn btn-primary" data-id="<?= $row['id'] ?>" data-bs-toggle="modal"
-										data-bs-target=".update-item-modal">Update</a>
-									<a href="#" class="delete-btn btn btn-danger" data-id="<?= $row['id'] ?>" data-bs-toggle="modal"
-										data-bs-target=".delete-item-modal">Delete</a>
-								</td>
+								<th scope="col">Item Name</th>
+								<th scope="col">Quantity</th>
+								<th scope="col">Location</th>
+								<th scope="col">Description</th>
+								<th scope="col">Status</th>
+								<th scope="col">Action</th>
 							</tr>
+						</thead>
+						<tbody id="tableBody">
+							<?php
+							$sql = "SELECT * FROM items";
+							$res = $conn->query($sql);
+							if ($res->num_rows > 0) {
+								while ($row = $res->fetch_assoc()) { ?>
 
-						<?php }
-					} else { ?>
+									<tr scope="row">
+										<td><?= $row['item_name'] ?></td>
+										<td><?= $row['quantity'] ?></td>
+										<td><?= $row['location'] ?></td>
+										<td><?= $row['description'] ?></td>
+										<td><?= $row['status'] ?></td>
+										<td>
+											<a href="#" class="update-btn btn btn-primary" data-id="<?= $row['id'] ?>" data-bs-toggle="modal"
+												data-bs-target=".update-item-modal">Update</a>
+											<a href="#" class="delete-btn btn btn-danger" data-id="<?= $row['id'] ?>" data-bs-toggle="modal"
+												data-bs-target=".delete-item-modal">Delete</a>
+										</td>
+									</tr>
 
-						<tr scope="row">
-							<td colspan="6">
-								0 Item Listed!
-							</td>
-						</tr>
+								<?php }
+							} else { ?>
 
-					<?php } ?>
-				</tbody>
-			</table>
+								<tr>
+									<td colspan="6" class="text-center py-4">
+										0 Item Listed!
+									</td>
+								</tr>
+
+							<?php } ?>
+						</tbody>
+					</table>
+				</div>
+			</div>
 		</div>
 
 		<!-- ########## END OF ITEM TABLE IN INDEX.HTML ########### -->
