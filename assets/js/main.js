@@ -6,40 +6,54 @@ document.addEventListener("DOMContentLoaded", function () {
   const deleteBtns = document.querySelectorAll(".delete-btn");
   addDeleteEvent(deleteBtns);
   /***** SEARCH BAR TYPING LISTENER *****/
-  document.getElementById("searchBar").addEventListener("keyup", async function (e) {
-    e.preventDefault();
+  document
+    .getElementById("searchBar")
+    .addEventListener("keyup", async function (e) {
+      e.preventDefault();
 
-    const query = this.value;
-    const token = document.getElementById("token").value;
-    const fetchParam = {
-      url: `./backend/search.php`,
-      method: "POST",
-      headers: { "Content-Type": "applicaiton/json", "CSRF-Token": token },
-      body: { q: query, token: token },
-    };
+      const query = this.value;
+      const token = document.getElementById("token").value;
+      const fetchParam = {
+        url: `./backend/search.php`,
+        method: "POST",
+        headers: { "Content-Type": "applicaiton/json", "CSRF-Token": token },
+        body: { q: query, token: token },
+      };
 
-    try {
-      loadTableData(await fetchingData(fetchParam));
-    } catch (error) {
-      console.lerror(`Error: ${error}`);
-    }
-  });
+      try {
+        loadTableData(await fetchingData(fetchParam));
+      } catch (error) {
+        console.lerror(`Error: ${error}`);
+      }
+    });
 
   /***** ADDING ITEM *****/
-  document.getElementById("addItemForm").addEventListener("submit", async (e) => {
+  document.getElementById("addItemForm").addEventListener("submit", async e => {
     e.preventDefault();
 
     const formData = {
-      item_name: DOMPurify.sanitize(document.getElementById("itemName").value.trim()),
-      quantity: DOMPurify.sanitize(document.getElementById("quantity").value.trim()),
-      location: DOMPurify.sanitize(document.getElementById("location").value.toUpperCase().trim()),
-      description: DOMPurify.sanitize(document.getElementById("description").value.trim()),
-      status: DOMPurify.sanitize(document.getElementById("status").value.trim()),
+      item_name: DOMPurify.sanitize(
+        document.getElementById("itemName").value.trim(),
+      ),
+      quantity: DOMPurify.sanitize(
+        document.getElementById("quantity").value.trim(),
+      ),
+      location: DOMPurify.sanitize(
+        document.getElementById("location").value.toUpperCase().trim(),
+      ),
+      description: DOMPurify.sanitize(
+        document.getElementById("description").value.trim(),
+      ),
+      status: DOMPurify.sanitize(
+        document.getElementById("status").value.trim(),
+      ),
     };
 
     const missingKey = hasMissingValues(formData);
     if (missingKey) {
-      console.error(`Error: Value for key '${missingKey}' is missing or empty!`);
+      console.error(
+        `Error: Value for key '${missingKey}' is missing or empty!`,
+      );
       return;
     } else {
       console.log("All keys have valid values.");
@@ -56,7 +70,9 @@ document.addEventListener("DOMContentLoaded", function () {
       const data = await fetchingData(fetchParam);
 
       const addItemModal = document.getElementById("addItemModal");
-      const modalInstance = bootstrap.Modal.getInstance(addItemModal) || new bootstrap.Modal(addItemModal);
+      const modalInstance =
+        bootstrap.Modal.getInstance(addItemModal) ||
+        new bootstrap.Modal(addItemModal);
       modalInstance.hide();
 
       if (data.status === "success") {
@@ -91,13 +107,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (data.length === 0) {
         tbody.innerHTML = `
-          <tr scope="row">
-            <td colspan="6">0 Item Listed!</td>
+          <tr>
+            <td colspan="6" class="text-center py-4">0 Item Listed!</td>
           </tr>
           `;
       } else {
         console.log(`Rendering ${data.length} items.`);
-        data.forEach((item) => {
+        data.forEach(item => {
           tbody.innerHTML += `
           <tr scope="row">
             <td>${item.item_name}</td>
@@ -121,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   async function addEventToNewButton(updateBtns) {
-    updateBtns.forEach((button) => {
+    updateBtns.forEach(button => {
       button.addEventListener("click", async function () {
         const updateId = this.getAttribute("data-id");
         const itemId = document.getElementById("itemId");
@@ -146,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
             location.value = data.location;
             description.value = data.description;
 
-            Array.from(itemStatus.options).forEach((option) => {
+            Array.from(itemStatus.options).forEach(option => {
               if (option.value === data.item_status) {
                 option.selected = true;
               }
@@ -164,43 +180,59 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  document.getElementById("updateItemForm").addEventListener("submit", async () => {
-    const formData = {
-      item_id: DOMPurify.sanitize(document.getElementById("itemId").value.trim()),
-      item_name: DOMPurify.sanitize(document.getElementById("updateItemName").value.trim()),
-      quantity: DOMPurify.sanitize(document.getElementById("updateQuantity").value.trim()),
-      location: DOMPurify.sanitize(document.getElementById("updateLocation").value.trim()),
-      description: DOMPurify.sanitize(document.getElementById("updateDescription").value.trim()),
-      item_status: DOMPurify.sanitize(document.getElementById("updateStatus").value.trim()),
-    };
-    const missingKey = hasMissingValues(formData);
-    if (missingKey) {
-      console.error(`Error: Value for key '${missingKey}' is missing or empty!`);
-      return;
-    } else {
-      console.log(`"All keys have valid values.`);
-    }
-    const fetchParam = {
-      url: `./backend/update_item.php`,
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: formData,
-    };
-    try {
-      const data = await fetchingData(fetchParam);
-      if (data.status === "success") {
-        console.log(data.message);
-        popupSystemMessage("System Message", data.message);
+  document
+    .getElementById("updateItemForm")
+    .addEventListener("submit", async () => {
+      const formData = {
+        item_id: DOMPurify.sanitize(
+          document.getElementById("itemId").value.trim(),
+        ),
+        item_name: DOMPurify.sanitize(
+          document.getElementById("updateItemName").value.trim(),
+        ),
+        quantity: DOMPurify.sanitize(
+          document.getElementById("updateQuantity").value.trim(),
+        ),
+        location: DOMPurify.sanitize(
+          document.getElementById("updateLocation").value.trim(),
+        ),
+        description: DOMPurify.sanitize(
+          document.getElementById("updateDescription").value.trim(),
+        ),
+        item_status: DOMPurify.sanitize(
+          document.getElementById("updateStatus").value.trim(),
+        ),
+      };
+      const missingKey = hasMissingValues(formData);
+      if (missingKey) {
+        console.error(
+          `Error: Value for key '${missingKey}' is missing or empty!`,
+        );
+        return;
       } else {
-        console.error(data.message);
+        console.log(`"All keys have valid values.`);
       }
-    } catch (error) {
-      console.error(`Error: ${error}`);
-    }
-  });
+      const fetchParam = {
+        url: `./backend/update_item.php`,
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: formData,
+      };
+      try {
+        const data = await fetchingData(fetchParam);
+        if (data.status === "success") {
+          console.log(data.message);
+          popupSystemMessage("System Message", data.message);
+        } else {
+          console.error(data.message);
+        }
+      } catch (error) {
+        console.error(`Error: ${error}`);
+      }
+    });
 
   async function addDeleteEvent(deleteBtns) {
-    deleteBtns.forEach((button) => {
+    deleteBtns.forEach(button => {
       button.addEventListener("click", async function () {
         const deleteId = this.getAttribute("data-id");
         const itemId = document.getElementById("itemId");
@@ -227,31 +259,35 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  document.getElementById("deleteItemForm").addEventListener("submit", async () => {
-    const itemId = DOMPurify.sanitize(document.getElementById("itemId").value.trim());
-    const formData = { item_id: itemId };
-    const missingKey = hasMissingValues(formData);
-    if (missingKey) {
-      console.error("ID is missing");
-      return;
-    }
-    const fetchParam = {
-      url: "./backend/delete_item.php",
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: formData,
-    };
-    try {
-      const data = await fetchingData(fetchParam);
-      if (data.status === "success") {
-        console.log(data.message);
-      } else {
-        console.error(data.message);
+  document
+    .getElementById("deleteItemForm")
+    .addEventListener("submit", async () => {
+      const itemId = DOMPurify.sanitize(
+        document.getElementById("itemId").value.trim(),
+      );
+      const formData = { item_id: itemId };
+      const missingKey = hasMissingValues(formData);
+      if (missingKey) {
+        console.error("ID is missing");
+        return;
       }
-    } catch (error) {
-      console.error(error);
-    }
-  });
+      const fetchParam = {
+        url: "./backend/delete_item.php",
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: formData,
+      };
+      try {
+        const data = await fetchingData(fetchParam);
+        if (data.status === "success") {
+          console.log(data.message);
+        } else {
+          console.error(data.message);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    });
 
   function hasMissingValues(dictionary) {
     for (const key in dictionary) {
@@ -279,7 +315,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const titleId = document.getElementById("popupTitle");
       const modalBody = document.getElementById("popupMsgContent");
 
-      if (!modalElement || !titleId || !modalBody) throw new Error("Reference to Id not found.");
+      if (!modalElement || !titleId || !modalBody)
+        throw new Error("Reference to Id not found.");
 
       titleId.textContent = title;
       modalBody.textContent = message;
