@@ -1,12 +1,6 @@
-@font-face {
-  font-family: JetBrains Mono NL;
-  src: url(../fonts/JetBrainsMonoNL-Regular.ttf);
-  font-weight: 400;
-}
-
 :root {
   /***** COLORS *****/
-  --main-font: JetBrains Mono NL;
+  --main-font: Inter;
   --main-color: #000;
   --sec-color: #fff;
   --bg-color: #2a2d34;
@@ -14,21 +8,15 @@
   --front: #30c5ff;
 
   /***** SIZES *****/
-  --font-size: 16px;
-  --login-form-w: 300px;
-  --h1-font-size: 32px;
-  --inc-pass-font-size: 16px;
+  --font-size: 1rem;
+  --h1-font-size: 2rem;
+  --inc-pass-font-size: 1rem;
 }
 
 *,
 ::before,
 ::after {
   box-sizing: border-box;
-}
-
-html,
-body {
-  /* min-width: 575px; */
 }
 
 body {
@@ -40,7 +28,8 @@ body {
 
 .content {
   background-color: var(--bg-color);
-  height: 100vh;
+  display: flex;
+  height: 100dvh;
   align-items: center;
   justify-content: center;
 }
@@ -66,7 +55,6 @@ body {
 
 .login-form {
   background-color: var(--fg-color);
-  width: var(--login-form-w);
   padding: 2rem;
   border-radius: 0 0 1rem 1rem;
   border-top: 1px solid black;
