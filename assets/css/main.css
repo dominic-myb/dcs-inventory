@@ -1,16 +1,14 @@
-@font-face {
-  font-family: JetBrains Mono NL;
-  src: url(../fonts/JetBrainsMonoNL-Regular.ttf);
-  font-weight: 400;
-}
-
 html,
 body {
   min-width: 575px;
 }
 
 body {
-  font-family: JetBrains Mono NL, Arial, Helvetica, sans-serif;
+  font-family:
+    Inter,
+    Arial,
+    Helvetica,
+    sans-serif;
   background-color: whitesmoke;
 }
 
@@ -58,12 +56,6 @@ td {
   text-align: center;
   vertical-align: middle;
   font-size: var(--font-size);
-}
-
-tbody tr td:last-of-type {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
 }
 
 #description {
