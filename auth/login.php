@@ -18,6 +18,9 @@ $LOGIN_JS = "../assets/js/login.js";
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
   <link rel="shortcut icon" href="<?= $ICON_IMG_PATH ?>" type="image/x-icon" />
   <link rel="stylesheet" href="<?= $BOOTSTRAP_CSS_PATH ?>" />
   <link rel="stylesheet" href="<?= $LOGIN_CSS ?>" />
@@ -26,7 +29,7 @@ $LOGIN_JS = "../assets/js/login.js";
 
 <body>
   <main>
-    <div class="content d-flex">
+    <div class="content d-flex min-vh-100dvh">
       <div class="wrapper">
 
         <h1>LOGIN</h1>
