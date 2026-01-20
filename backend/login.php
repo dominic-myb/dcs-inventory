@@ -14,7 +14,7 @@ if ($data === null) {
 }
 
 // VALIDATE CSRF TOKEN
-include("db_config.php");
+include("db-config.php");
 $submittedToken = $conn->real_escape_string($data->csrf_token ?? '');
 $sessionToken = $conn->real_escape_string($_SESSION['csrf_token'] ?? '');
 

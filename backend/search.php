@@ -18,7 +18,7 @@ if ($token !== $_SESSION['csrf_token']) {
   exit();
 }
 
-include("db_config.php");
+include("db-config.php");
 $search = $data->q ?? '';
 $search = '%' . $search . '%';
 $search = $conn->real_escape_string($search);

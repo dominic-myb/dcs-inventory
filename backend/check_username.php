@@ -1,6 +1,6 @@
 <?php
 header('Content-Type: application/json');
-include("db_config.php");
+include("db-config.php");
 
 $data = json_decode(file_get_contents('php://input'));
 $username = $conn->real_escape_string($data->username ?? '');

@@ -6,7 +6,7 @@ if (!is_numeric($item_id)) {
   exit();
 }
 try {
-  include("db_config.php");
+  include("db-config.php");
   $sql = "SELECT * FROM items WHERE id=?";
   $stmt = $conn->prepare($sql);
   $stmt->bind_param("i", $item_id);

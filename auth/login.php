@@ -3,7 +3,7 @@ session_start();
 if (empty($_SESSION['csrf_token'])) {
   $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); // Generate a secure CSRF token
 }
-include("../backend/db_config.php");
+include("../backend/db-config.php");
 $PAGE_TITLE = "LOGIN";
 $ICON_IMG_PATH = "../assets/imgs/dcs-logo-round.png";
 $BOOTSTRAP_CSS_PATH = "../assets/vendors/css/bootstrap.min.css";

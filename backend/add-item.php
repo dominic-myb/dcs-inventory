@@ -13,7 +13,7 @@ if ($data === null) {
 }
 
 /*** GET AND SANITIZE INPUT ***/
-include("db_config.php");
+include("db-config.php");
 $item_name = $conn->real_escape_string($data->item_name ?? '');
 $quantity = $conn->real_escape_string($data->quantity ?? '');
 $location = $conn->real_escape_string($data->location ?? '');

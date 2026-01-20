@@ -5,7 +5,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 	exit();
 }
 
-include("./backend/db_config.php");
+include("./backend/db-config.php");
 $PAGE_TITLE = "Inventory Management System";
 $BOOTSTRAP_CSS_PATH = "./assets/vendors/css/bootstrap.min.css";
 $MAIN_CSS_PATH = "./assets/css/main.css";

@@ -1,5 +1,5 @@
 <?php
-include("../backend/db_config.php");
+include("../backend/db-config.php");
 $PAGE_TITLE = "REGISTER";
 $ICON_IMG_PATH = "../assets/imgs/dcs-logo-round.png";
 $BOOTSTRAP_CSS_PATH = "../assets/vendors/css/bootstrap.min.css";

@@ -1,7 +1,7 @@
 <?php
 header("Content-Type: application/json");
 session_start();
-include("db_config.php");
+include("db-config.php");
 $data = json_decode(file_get_contents('php://input'));
 $item_id = $conn->real_escape_string($data->item_id ?? '');
 

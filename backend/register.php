@@ -12,7 +12,7 @@ if ($data === null) {
   exit();
 }
 
-include("db_config.php");
+include("db-config.php");
 $firstname = $data->firstname ?? '';
 $lastname = $data->lastname ?? '';
 $username = $data->username ?? '';

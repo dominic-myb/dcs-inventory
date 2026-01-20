@@ -1,5 +1,5 @@
 <?php
-include("db_config.php");
+include("db-config.php");
 
 $sql = "SELECT * FROM items";
 $result = $conn->query($sql);
