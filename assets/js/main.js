@@ -214,7 +214,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(`"All keys have valid values.`);
       }
       const fetchParam = {
-        url: `./backend/update_item.php`,
+        url: `./backend/update-item.php`,
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: formData,
