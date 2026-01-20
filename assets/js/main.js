@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const description = document.getElementById("updateDescription");
         const itemStatus = document.getElementById("updateStatus");
         const fetchParam = {
-          url: `./backend/select_item.php`,
+          url: `./backend/select-item.php`,
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: { item_id: updateId },
@@ -239,7 +239,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const itemId = document.getElementById("itemId");
         const itemNameDisplay = document.getElementById("itemNameDisplay");
         const fetchParam = {
-          url: `./backend/select_item.php`,
+          url: `./backend/select-item.php`,
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: { item_id: deleteId },
