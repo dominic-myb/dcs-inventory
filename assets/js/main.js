@@ -1,3 +1,4 @@
+"use strict";
 // TODO: SEE LINE 78, MAKE ERROR CONSOLE FORMAT LIKE IN LINE 170
 document.addEventListener("DOMContentLoaded", function () {
   /***** UPDATE BUTTONS *****/

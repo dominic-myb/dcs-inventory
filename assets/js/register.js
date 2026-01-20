@@ -1,3 +1,4 @@
+"use strict";
 document.addEventListener("DOMContentLoaded", () => {
   /***** SHOW AND HIDE ERROR FUNCTION *****/
   function showErrorMsg(id, msg, time) {
@@ -29,13 +30,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const hasSymbol = /[!@#$%^&*(),.?":{}|<>]/.test(password);
     const isLongEnough = password.length >= 12;
     if (!standardLength) return 0;
-    const strengthScore = [hasLowercase, hasUppercase, hasNumber, hasSymbol, isLongEnough].filter(Boolean).length;
+    const strengthScore = [
+      hasLowercase,
+      hasUppercase,
+      hasNumber,
+      hasSymbol,
+      isLongEnough,
+    ].filter(Boolean).length;
 
     return strengthScore;
   }
 
   /***** PASSWORD TYPING LISTENER *****/
-  document.getElementById("passInput").addEventListener("keyup", async (e) => {
+  document.getElementById("passInput").addEventListener("keyup", async e => {
     e.preventDefault();
     const password = document.getElementById("passInput").value.trim();
     const passStrengthMeterId = document.getElementById("passStrength");
@@ -50,73 +57,85 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /***** FORM SUBMISSION LISTENER *****/
-  document.getElementById("registrationForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
+  document
+    .getElementById("registrationForm")
+    .addEventListener("submit", async e => {
+      e.preventDefault();
 
-    const submitBtn = document.getElementById("submitBtn");
-    submitBtn.disabled = true;
+      const submitBtn = document.getElementById("submitBtn");
+      submitBtn.disabled = true;
 
-    setTimeout(() => {
-      submitBtn.disabled = false;
-    }, 3000);
+      setTimeout(() => {
+        submitBtn.disabled = false;
+      }, 3000);
 
-    const username = DOMPurify.sanitize(document.getElementById("userInput").value.trim());
-    const password = DOMPurify.sanitize(document.getElementById("passInput").value.trim());
-    const passInputConfirm = DOMPurify.sanitize(document.getElementById("passInputConfirm").value.trim());
+      const username = DOMPurify.sanitize(
+        document.getElementById("userInput").value.trim(),
+      );
+      const password = DOMPurify.sanitize(
+        document.getElementById("passInput").value.trim(),
+      );
+      const passInputConfirm = DOMPurify.sanitize(
+        document.getElementById("passInputConfirm").value.trim(),
+      );
 
-    const errorMsgId = document.getElementById("errorMsg");
-    const seconds = 3000;
+      const errorMsgId = document.getElementById("errorMsg");
+      const seconds = 3000;
 
-    if (username.length < 8) {
-      let msg = "Minimum length 8 characters";
-      showErrorMsg(errorMsgId, msg, 3000);
-      inputFieldColorChange("#userInput");
-      return;
-    }
-
-    if (!/^[a-z_0-9]+$/.test(username)) {
-      let msg = "Only a-z, 0-9, or _ are allowed.";
-      showErrorMsg(errorMsgId, msg, seconds);
-      inputFieldColorChange("#userInput");
-      return;
-    }
-
-    if (password !== passInputConfirm) {
-      let msg = "Password doesn't match";
-      showErrorMsg(errorMsgId, msg, 3000);
-      inputFieldColorChange("#passInput");
-      inputFieldColorChange("#passInputConfirm");
-      return;
-    }
-
-    const firstname = DOMPurify.sanitize(document.getElementById("fnameInput").value.trim());
-    const lastname = DOMPurify.sanitize(document.getElementById("lnameInput").value.trim());
-
-    try {
-      const response = await fetch("../backend/register.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ firstname, lastname, username, password }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
+      if (username.length < 8) {
+        let msg = "Minimum length 8 characters";
+        showErrorMsg(errorMsgId, msg, 3000);
+        inputFieldColorChange("#userInput");
+        return;
       }
 
-      const data = await response.json();
-
-      if (data.status === "success") {
-        console.log("Registration Successful:", data.message);
-        window.location.href = "login.php";
-      } else {
-        console.error("Registration failed:", data.message);
-        showErrorMsg(errorMsgId, data.message, 3000);
+      if (!/^[a-z_0-9]+$/.test(username)) {
+        let msg = "Only a-z, 0-9, or _ are allowed.";
+        showErrorMsg(errorMsgId, msg, seconds);
+        inputFieldColorChange("#userInput");
+        return;
       }
-    } catch (error) {
-      console.error("An error occurred:", error);
-      showErrorMsg(errorMsgId, error, 3000);
-    }
-  });
+
+      if (password !== passInputConfirm) {
+        let msg = "Password doesn't match";
+        showErrorMsg(errorMsgId, msg, 3000);
+        inputFieldColorChange("#passInput");
+        inputFieldColorChange("#passInputConfirm");
+        return;
+      }
+
+      const firstname = DOMPurify.sanitize(
+        document.getElementById("fnameInput").value.trim(),
+      );
+      const lastname = DOMPurify.sanitize(
+        document.getElementById("lnameInput").value.trim(),
+      );
+
+      try {
+        const response = await fetch("../backend/register.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ firstname, lastname, username, password }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+
+        if (data.status === "success") {
+          console.log("Registration Successful:", data.message);
+          window.location.href = "login.php";
+        } else {
+          console.error("Registration failed:", data.message);
+          showErrorMsg(errorMsgId, data.message, 3000);
+        }
+      } catch (error) {
+        console.error("An error occurred:", error);
+        showErrorMsg(errorMsgId, error, 3000);
+      }
+    });
 });

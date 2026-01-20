@@ -1,3 +1,4 @@
+"use strict";
 document.addEventListener("DOMContentLoaded", () => {
   /***** SHOW AND HIDE ERROR *****/
   function showErrorMsg(id, msg, time) {
@@ -30,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /***** FORM SUBMISSION *****/
-  document.getElementById("login-form").addEventListener("submit", async (e) => {
+  document.getElementById("login-form").addEventListener("submit", async e => {
     e.preventDefault();
     try {
       const submitBtn = document.getElementById("submitBtn");
@@ -42,15 +43,19 @@ document.addEventListener("DOMContentLoaded", () => {
         submitBtn.disabled = false;
       }, 3000);
 
-      const username = DOMPurify.sanitize(document.getElementById("userInput").value.trim());
-      const password = DOMPurify.sanitize(document.getElementById("passInput").value.trim());
+      const username = DOMPurify.sanitize(
+        document.getElementById("userInput").value.trim(),
+      );
+      const password = DOMPurify.sanitize(
+        document.getElementById("passInput").value.trim(),
+      );
       const token = document.getElementById("csrfToken").value;
       const formData = {
         username: username,
         password: password,
         csrf_token: token,
       };
-      
+
       const response = await fetch("../backend/login.php", {
         method: "POST",
         headers: {
