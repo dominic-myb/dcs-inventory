@@ -273,7 +273,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
       const fetchParam = {
-        url: "./backend/delete_item.php",
+        url: "./backend/delete-item.php",
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: formData,
